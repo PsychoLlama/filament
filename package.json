@@ -1,15 +1,26 @@
 {
-  "scripts": {
-    "test": "jest"
-  },
-  "devDependencies": {
-    "jest": "^19.0.2"
-  },
-  "name": "filament",
+  "name": "hue-filament",
   "version": "0.1.0",
   "description": "GraphQL for Philips Hue",
   "main": "dist/index.js",
   "repository": "https://github.com/PsychoLlama/filament",
   "author": "Jesse Gibson <Jesse_Gibson@me.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint src/",
+    "transpile": "babel src/ -d dist/"
+  },
+  "dependencies": {
+    "graphql": "^0.9.5"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-eslint": "^7.2.3",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-preset-es2015-node": "^6.1.1",
+    "eslint": "^3.19.0",
+    "eslint-config-llama": "^3.0.0",
+    "jest": "^19.0.2"
+  }
 }
