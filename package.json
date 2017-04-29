@@ -1,0 +1,15 @@
+{
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^19.0.2"
+  },
+  "name": "filament",
+  "version": "0.1.0",
+  "description": "GraphQL for Philips Hue",
+  "main": "dist/index.js",
+  "repository": "https://github.com/PsychoLlama/filament",
+  "author": "Jesse Gibson <Jesse_Gibson@me.com>",
+  "license": "MIT"
+}
