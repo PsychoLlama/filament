@@ -9,9 +9,14 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint src/",
-    "transpile": "babel src/ -d dist/"
+    "transpile": "babel src/ -d dist/",
+    "transpile:watch": "npm run transpile -- --watch",
+    "start": "node .",
+    "start:dev": "nodemon ."
   },
   "dependencies": {
+    "express": "^4.15.2",
+    "express-graphql": "^0.6.4",
     "graphql": "^0.9.5"
   },
   "devDependencies": {
@@ -21,6 +26,7 @@
     "babel-preset-es2015-node": "^6.1.1",
     "eslint": "^3.19.0",
     "eslint-config-llama": "^3.0.0",
-    "jest": "^19.0.2"
+    "jest": "^19.0.2",
+    "nodemon": "^1.11.0"
   }
 }
