@@ -11,7 +11,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "lint": "eslint src/",
-    "build": "babel src/ -d dist/",
+    "build": "babel src/ -d dist/ --ignore __mocks__,__tests__",
     "build:watch": "npm run build -- --watch",
     "start": "node .",
     "start:watch": "nodemon .",
@@ -26,12 +26,18 @@
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.3",
-    "babel-plugin-rewire": "^1.1.0",
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-preset-es2015-node": "^6.1.1",
     "eslint": "^3.19.0",
     "eslint-config-llama": "^3.0.0",
     "jest": "^19.0.2",
     "nodemon": "^1.11.0"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "<rootDir>/dist/",
+      "<rootDir>/node_modules/"
+    ]
   }
 }
