@@ -1,27 +1,32 @@
 {
   "name": "hue-filament",
-  "version": "0.1.0",
-  "description": "GraphQL for Philips Hue",
   "main": "dist/index.js",
-  "repository": "https://github.com/PsychoLlama/filament",
-  "author": "Jesse Gibson <Jesse_Gibson@me.com>",
+  "description": "GraphQL for Philips Hue",
+  "version": "0.1.0",
+  "private": true,
   "license": "MIT",
+  "author": "Jesse Gibson <Jesse_Gibson@me.com>",
+  "repository": "https://github.com/PsychoLlama/filament",
   "scripts": {
     "test": "jest",
+    "test:watch": "jest --watch",
     "lint": "eslint src/",
-    "transpile": "babel src/ -d dist/",
-    "transpile:watch": "npm run transpile -- --watch",
+    "build": "babel src/ -d dist/",
+    "build:watch": "npm run build -- --watch",
     "start": "node .",
-    "start:dev": "nodemon ."
+    "start:watch": "nodemon .",
+    "register": "node ./dist/bin/setup.js"
   },
   "dependencies": {
     "express": "^4.15.2",
     "express-graphql": "^0.6.4",
-    "graphql": "^0.9.5"
+    "graphql": "^0.9.5",
+    "hue-connect": "^0.1.2"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.3",
+    "babel-plugin-rewire": "^1.1.0",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-preset-es2015-node": "^6.1.1",
     "eslint": "^3.19.0",
