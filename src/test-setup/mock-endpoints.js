@@ -51,18 +51,20 @@ const createGroup = (fields = {}) => ({
   ...fields,
 });
 
-const root = nock(url());
+const root = nock(url()).persist();
 
-root.get('/lights').times(Infinity).reply(200, {
+root.get('/lights').reply(200, {
   1: createLight(),
   2: createLight(),
   3: createLight(),
 });
 
-root.get('/lights/1').times(Infinity).reply(200, createLight());
+root.get('/lights/1').reply(200, createLight());
 
-root.get('/groups').times(Infinity).reply(200, {
+root.get('/groups').reply(200, {
   1: createGroup(),
   2: createGroup(),
   3: createGroup(),
 });
+
+root.get('/groups/2').reply(200, createGroup());
