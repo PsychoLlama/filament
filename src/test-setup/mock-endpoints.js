@@ -38,3 +38,5 @@ root.get('/lights').times(Infinity).reply(200, {
   2: createLight(),
   3: createLight(),
 });
+
+root.get('/lights/1').times(Infinity).reply(200, createLight());

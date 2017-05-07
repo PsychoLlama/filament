@@ -33,7 +33,6 @@ export default new GraphQLObjectType({
     name: { type: GraphQLString },
     type: { type: GraphQLString },
     id: { type: GraphQLInt },
-
     state: { type: State },
   },
 });
