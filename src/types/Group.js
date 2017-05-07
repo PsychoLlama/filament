@@ -22,14 +22,25 @@ const Action = new GraphQLObjectType({
   },
 });
 
+const State = new GraphQLObjectType({
+  name: 'GroupState',
+  fields: {
+    'all_on': { type: GraphQLBoolean },
+    'any_on': { type: GraphQLBoolean },
+  },
+});
+
 export default new GraphQLObjectType({
   name: 'Group',
   fields: {
     lights: { type: new GraphQLList(GraphQLInt) },
+    recycle: { type: GraphQLBoolean },
+    class: { type: GraphQLString },
     name: { type: GraphQLString },
     type: { type: GraphQLString },
     id: { type: GraphQLInt },
 
     action: { type: Action },
+    state: { type: State },
   },
 });

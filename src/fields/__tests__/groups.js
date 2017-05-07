@@ -34,4 +34,18 @@ describe('{ groups }', () => {
       ct: 250,
     });
   });
+
+  it('returns group state', async () => {
+    const response = await query`{
+      groups {
+        state { all_on any_on }
+      }
+    }`;
+
+    expect(response.errors).toBeFalsy();
+    expect(response.data.groups[0].state).toEqual({
+      'all_on': false,
+      'any_on': true,
+    });
+  });
 });

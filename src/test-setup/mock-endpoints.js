@@ -32,9 +32,11 @@ const createLight = (fields = {}) => ({
 });
 
 const createGroup = (fields = {}) => ({
-  type: 'LightGroup',
   name: 'Group name',
+  class: 'Hallway',
   lights: [1, 2],
+  recycle: true,
+  type: 'Room',
 
   action: {
     alert: 'select',
@@ -46,6 +48,11 @@ const createGroup = (fields = {}) => ({
     bri: 254,
     on: true,
     ct: 250,
+  },
+
+  state: {
+    'all_on': false,
+    'any_on': true,
   },
 
   ...fields,
