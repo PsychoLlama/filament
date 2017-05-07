@@ -37,4 +37,28 @@ describe('{ lights }', () => {
       modelid: 'LCT001',
     });
   });
+
+  describe('state', () => {
+    it('contains the state', async () => {
+      const response = await query`{
+        lights {
+          state { on hue sat bri effect xy ct alert colormode reachable }
+        }
+      }`;
+
+      expect(response.errors).toBeFalsy();
+      expect(response.data.lights[0].state).toEqual({
+        xy: [0.3144, 0.3301],
+        reachable: true,
+        colormode: 'xy',
+        effect: 'none',
+        alert: 'none',
+        hue: 34076,
+        sat: 251,
+        bri: 254,
+        on: true,
+        ct: 153,
+      });
+    });
+  });
 });
