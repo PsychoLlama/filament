@@ -21,7 +21,8 @@
     "express": "^4.15.2",
     "express-graphql": "^0.6.4",
     "graphql": "^0.9.5",
-    "hue-connect": "^0.1.2"
+    "hue-connect": "^0.1.2",
+    "node-fetch": "^1.6.3"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
@@ -32,12 +33,32 @@
     "eslint": "^3.19.0",
     "eslint-config-llama": "^3.0.0",
     "jest": "^19.0.2",
+    "nock": "^9.0.13",
     "nodemon": "^1.11.0"
   },
   "jest": {
     "testPathIgnorePatterns": [
       "<rootDir>/dist/",
       "<rootDir>/node_modules/"
-    ]
+    ],
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/src/test-setup/",
+      "<rootDir>/src/index.js"
+    ],
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ],
+    "setupFiles": [
+      "<rootDir>/src/test-setup/mock-endpoints.js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "statements": 100,
+        "functions": 100,
+        "branches": 100,
+        "lines": 100
+      }
+    }
   }
 }
