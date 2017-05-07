@@ -31,12 +31,40 @@ const createLight = (fields = {}) => ({
   ...fields,
 });
 
-const root = nock(url());
+const createGroup = (fields = {}) => ({
+  type: 'LightGroup',
+  name: 'Group name',
+  lights: [1, 2],
 
-root.get('/lights').times(Infinity).reply(200, {
+  action: {
+    alert: 'select',
+    colormode: 'ct',
+    effect: 'none',
+    xy: [0.5, 0.5],
+    hue: 10000,
+    sat: 254,
+    bri: 254,
+    on: true,
+    ct: 250,
+  },
+
+  ...fields,
+});
+
+const root = nock(url()).persist();
+
+root.get('/lights').reply(200, {
   1: createLight(),
   2: createLight(),
   3: createLight(),
 });
 
-root.get('/lights/1').times(Infinity).reply(200, createLight());
+root.get('/lights/1').reply(200, createLight());
+
+root.get('/groups').reply(200, {
+  1: createGroup(),
+  2: createGroup(),
+  3: createGroup(),
+});
+
+root.get('/groups/2').reply(200, createGroup());
