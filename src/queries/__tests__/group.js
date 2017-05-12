@@ -1,6 +1,6 @@
 import { query } from '../../test-setup/utils';
 
-describe('{ group }', () => {
+describe('query { group }', () => {
   it('returns the correct group', async () => {
     const response = await query`{
       group(id: 2) {

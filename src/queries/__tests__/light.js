@@ -1,6 +1,6 @@
 import { query } from '../../test-setup/utils';
 
-describe('{ light }', () => {
+describe('query { light }', () => {
   it('returns a light', async () => {
     const response = await query`{
       light(id: 1) { name id }

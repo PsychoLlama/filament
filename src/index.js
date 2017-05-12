@@ -2,7 +2,7 @@ import graphqlHttp from 'express-graphql';
 import express from 'express';
 import rc from 'rc';
 
-import * as fields from './fields';
+import * as queries from './queries';
 import schema from './schema';
 
 const config = rc('filament', {
@@ -13,7 +13,7 @@ const config = rc('filament', {
 
 const graphqlEndpoint = graphqlHttp({
   graphiql: config.graphiql === true,
-  rootValue: fields,
+  rootValue: queries,
   schema,
 });
 

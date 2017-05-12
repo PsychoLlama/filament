@@ -1,6 +1,6 @@
 import { query } from '../../test-setup/utils';
 
-describe('{ groups }', () => {
+describe('query { groups }', () => {
   it('returns an array', async () => {
     const response = await query`{
       groups { name id }

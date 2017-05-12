@@ -75,3 +75,9 @@ root.get('/groups').reply(200, {
 });
 
 root.get('/groups/2').reply(200, createGroup());
+
+root.put('/groups/5/action').once().reply(200, [
+  { success: { '/groups/5/action/on': true } },
+]);
+
+root.put('/groups/5/action').once().reply(500, 'Internal server potato.');
