@@ -50,6 +50,9 @@
     "collectCoverageFrom": [
       "src/**/*.js"
     ],
+    "coverageReporters": [
+      "html"
+    ],
     "setupFiles": [
       "<rootDir>/src/test-setup/mock-bridge.js"
     ],
