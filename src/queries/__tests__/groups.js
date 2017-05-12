@@ -1,6 +1,20 @@
-import { query } from '../../test-setup/utils';
+import { query, bridge, createGroup } from '../../test-setup/utils';
 
 describe('query { groups }', () => {
+  let endpoint;
+
+  beforeEach(() => {
+    endpoint = bridge.get('/groups').reply(200, {
+      1: createGroup(),
+      2: createGroup(),
+      3: createGroup(),
+    });
+  });
+
+  afterEach(() => {
+    endpoint.done();
+  });
+
   it('returns an array', async () => {
     const response = await query`{
       groups { name id }
