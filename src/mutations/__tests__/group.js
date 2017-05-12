@@ -21,7 +21,13 @@ describe('mutation { group }', () => {
 
   it('fails if the endpoint fails', async () => {
     endpoint = bridge.put('/groups/5/action')
-      .reply(500, 'Internal server potato.');
+      .reply(500, [{
+        error: {
+          type: 7,
+          address: '/groups/5',
+          description: 'Invalid potato. Please provide potato.',
+        },
+      }]);
 
     const response = await query`mutation {
       group(id: 5, state: {

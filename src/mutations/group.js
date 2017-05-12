@@ -20,7 +20,14 @@ export default {
     state: { type: new GraphQLNonNull(State) },
   },
   resolve: async (type, args) => {
-    await put(`groups/${args.id}/action`, args.state);
+    const response = await put(`groups/${args.id}/action`, args.state);
+    const json = await response.json();
+
+    json.forEach((result) => {
+      if (result.error) {
+        throw new Error(result.error.description);
+      }
+    });
 
     return true;
   },
