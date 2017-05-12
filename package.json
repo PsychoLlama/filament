@@ -20,7 +20,7 @@
   "dependencies": {
     "express": "^4.15.2",
     "express-graphql": "^0.6.4",
-    "graphql": "^0.9.5",
+    "graphql": "^0.9.6",
     "hue-connect": "^0.1.2",
     "node-fetch": "^1.6.3",
     "rc": "^1.2.1"
@@ -33,7 +33,7 @@
     "babel-preset-es2015-node": "^6.1.1",
     "eslint": "^3.19.0",
     "eslint-config-llama": "^3.0.0",
-    "jest": "^19.0.2",
+    "jest": "^20.0.1",
     "nock": "^9.0.13",
     "nodemon": "^1.11.0"
   },
