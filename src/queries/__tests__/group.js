@@ -1,6 +1,8 @@
-import { query } from '../../test-setup/utils';
+import { query, createGroup, bridge } from '../../test-setup/utils';
 
-describe('{ group }', () => {
+bridge.get('/groups/2').times(3).reply(200, createGroup());
+
+describe('query { group }', () => {
   it('returns the correct group', async () => {
     const response = await query`{
       group(id: 2) {

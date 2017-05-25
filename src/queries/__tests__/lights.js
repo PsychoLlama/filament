@@ -1,6 +1,20 @@
-import { query } from '../../test-setup/utils';
+import { query, bridge, createLight } from '../../test-setup/utils';
 
-describe('{ lights }', () => {
+describe('query { lights }', () => {
+  let endpoint;
+
+  beforeEach(() => {
+    endpoint = bridge.get('/lights').reply(200, {
+      1: createLight(),
+      2: createLight(),
+      3: createLight(),
+    });
+  });
+
+  afterEach(() => {
+    endpoint.done();
+  });
+
   it('returns all lights', async () => {
     const response = await query`{
       lights { name }
