@@ -25,8 +25,8 @@ const Action = new GraphQLObjectType({
 const State = new GraphQLObjectType({
   name: 'GroupState',
   fields: {
-    'all_on': { type: GraphQLBoolean },
-    'any_on': { type: GraphQLBoolean },
+    allOn: { type: GraphQLBoolean },
+    anyOn: { type: GraphQLBoolean },
   },
 });
 

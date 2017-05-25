@@ -1,9 +1,20 @@
+/* eslint-disable camelcase */
 import { GraphQLList } from 'graphql';
 
 import Group from '../types/Group';
 import { fetch } from '../utils';
 
-const addGroupToList = (list, [id, group]) => list.concat({ ...group, id });
+const addGroupToList = (list, [id, group]) => {
+  const { any_on, all_on, groupState } = group.state;
+
+  const state = {
+    ...groupState,
+    allOn: all_on,
+    anyOn: any_on,
+  };
+
+  return list.concat({ ...group, state, id });
+};
 
 export default {
   type: new GraphQLList(Group),

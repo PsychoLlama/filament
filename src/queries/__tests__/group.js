@@ -20,14 +20,14 @@ describe('query { group }', () => {
   it('returns group state', async () => {
     const response = await query`{
       group(id: 2) {
-        state { all_on any_on }
+        state { allOn anyOn }
       }
     }`;
 
     expect(response.errors).toBeFalsy();
     expect(response.data.group.state).toEqual({
-      'all_on': false,
-      'any_on': true,
+      allOn: false,
+      anyOn: true,
     });
   });
 
