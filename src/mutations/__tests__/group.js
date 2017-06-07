@@ -8,7 +8,7 @@ describe('mutation { group }', () => {
     const endpoint = setup();
 
     const response = await query`mutation {
-      group(id: 5, on: false)
+      group(id: 5, on: false) { id }
     }`;
 
     expect(response.errors).toBeFalsy();
@@ -26,7 +26,7 @@ describe('mutation { group }', () => {
       }]);
 
     const response = await query`mutation {
-      group(id: 5, on: true)
+      group(id: 5, on: true) { id }
     }`;
 
     expect(response.errors).toBeTruthy();
@@ -43,7 +43,7 @@ describe('mutation { group }', () => {
       });
 
     const response = await query`mutation {
-      group(id: 10, on: true)
+      group(id: 10, on: true) { id }
     }`;
 
     expect(response.errors).toBeFalsy();
@@ -60,7 +60,7 @@ describe('mutation { group }', () => {
       });
 
     const response = await query`mutation {
-      group(id: 15, hue: 150, sat: 200, bri: 254)
+      group(id: 15, hue: 150, sat: 200, bri: 254) { id }
     }`;
 
     expect(response.errors).toBeFalsy();
@@ -77,10 +77,36 @@ describe('mutation { group }', () => {
       });
 
     const response = await query`mutation {
-      group(id: 5, transition: 1000)
+      group(id: 5, transition: 1000) { id }
     }`;
 
     expect(response.errors).toBeFalsy();
+    endpoint.done();
+  });
+
+  it('returns an optimistic response', async () => {
+    const endpoint = bridge.put('/groups/30/action')
+      .reply(200, [{
+        success: { 'groups/30/action/on': true },
+      }]);
+
+    const response = await query`mutation {
+      group(id: 30, on: true, hue: 20, sat: 30, bri: 40) {
+        id state { anyOn allOn }
+      }
+    }`;
+
+    expect(response.errors).toBeFalsy();
+    expect(response.data).toEqual({
+      group: {
+        id: 30,
+        state: {
+          anyOn: true,
+          allOn: true,
+        },
+      },
+    });
+
     endpoint.done();
   });
 });

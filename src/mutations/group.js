@@ -5,10 +5,22 @@ import {
   GraphQLID,
 } from 'graphql';
 
+import Group from '../types/Group';
 import { put } from '../utils';
 
+const getOptimisticState = (args) => {
+  const { on } = args;
+  const state = {};
+
+  if (on) {
+    state.allOn = state.anyOn = args.on;
+  }
+
+  return on ? state : null;
+};
+
 export default {
-  type: GraphQLBoolean,
+  type: Group,
   args: {
     id: { type: new GraphQLNonNull(GraphQLID) },
     transition: { type: GraphQLInt },
@@ -38,6 +50,9 @@ export default {
       }
     });
 
-    return true;
+    return {
+      id: args.id,
+      state: getOptimisticState(action),
+    };
   },
 };
