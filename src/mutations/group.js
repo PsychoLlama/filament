@@ -11,12 +11,13 @@ import { put } from '../utils';
 const getOptimisticState = (args) => {
   const { on } = args;
   const state = {};
+  const hasOnState = typeof on === 'boolean';
 
-  if (on) {
+  if (hasOnState) {
     state.allOn = state.anyOn = args.on;
   }
 
-  return on ? state : null;
+  return hasOnState ? state : null;
 };
 
 export default {

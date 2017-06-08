@@ -91,7 +91,7 @@ describe('mutation { group }', () => {
       }]);
 
     const response = await query`mutation {
-      group(id: 30, on: true, hue: 20, sat: 30, bri: 40) {
+      group(id: 30, on: false, hue: 20, sat: 30, bri: 40) {
         id state { anyOn allOn }
       }
     }`;
@@ -101,8 +101,8 @@ describe('mutation { group }', () => {
       group: {
         id: 30,
         state: {
-          anyOn: true,
-          allOn: true,
+          anyOn: false,
+          allOn: false,
         },
       },
     });
