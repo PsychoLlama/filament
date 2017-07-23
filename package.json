@@ -54,9 +54,6 @@
     "coverageReporters": [
       "html"
     ],
-    "setupFiles": [
-      "<rootDir>/src/test-setup/mock-bridge.js"
-    ],
     "coverageThreshold": {
       "global": {
         "statements": 100,

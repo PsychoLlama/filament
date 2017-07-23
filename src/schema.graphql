@@ -1,8 +1,22 @@
+# The type of light hardware being used.
+enum LightGroupType {
+  LightSource
+  LightGroup
+  Luminaire
+  Room
+}
+
 type LightGroup {
+  type: LightGroupType
+  recycle: Boolean
+  anyOn: Boolean
+  allOn: Boolean
+  class: String
   name: String
 }
 
 type Hue {
+  # A user-created group of hue lights.
   group(id: Int!): LightGroup
 }
 

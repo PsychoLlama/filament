@@ -1,10 +1,18 @@
 import { graphql } from 'graphql';
 import nock from 'nock';
 
-import { url } from '../utils';
-import schema from '../schema';
+import * as context from './context';
+import resolvers from './resolvers';
+import { url } from './utils';
+import schema from './schema';
 
-export const query = ([request]) => graphql(schema, request);
+export const query = async ([request]) => {
+  const response = await graphql(schema, request, resolvers, context);
+
+  expect(response.errors).toBeUndefined();
+
+  return response.data;
+};
 
 export const bridge = nock(url());
 

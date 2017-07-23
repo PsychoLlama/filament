@@ -1,1 +1,5 @@
-export { default as group } from './group';
+import * as hueResolvers from './hue-resolvers';
+
+export default {
+  hue: () => hueResolvers,
+};
