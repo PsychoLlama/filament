@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The color converter defaults to HSB 1`] = `"#1e1c1c"`;
+
+exports[`The color converter understands XY color coordinates 1`] = `"#38380a"`;
+
+exports[`The color converter understands temperature encoding 1`] = `"#201b20"`;

@@ -59,10 +59,9 @@ export const createGroup = (fields = {}) => ({
     ct: 250,
   },
 
-  state: {
-    'all_on': false,
-    'any_on': true,
-  },
+  /* eslint-disable camelcase */
+  state: { all_on: false, any_on: true },
+  /* eslint-enable camelcase */
 
   ...fields,
 });

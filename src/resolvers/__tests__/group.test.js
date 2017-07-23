@@ -1,4 +1,5 @@
 import { query, bridge, createGroup, createLight } from '../../test-utils';
+import toHexColorCode, { colorTypes } from '../../utils/color';
 
 jest.mock('../../../bridge.json');
 
@@ -56,5 +57,73 @@ describe('Group resolver', () => {
     });
 
     lightEndpoint.done();
+  });
+
+  describe('color', () => {
+    it('returns black if the group is powered off', async () => {
+      const group = createGroup();
+      group.state.any_on = false; // eslint-disable-line
+
+      endpoint = bridge.get('/groups/25').reply(200, group);
+
+      const { hue } = await query`{
+        hue {
+          group(id: 25) { color }
+        }
+      }`;
+
+      expect(hue.group.color).toBe('#000000');
+    });
+
+    it('returns a hex code', async () => {
+      const group = createGroup();
+      group.state.colormode = colorTypes.HSB;
+      group.state.hue = 64000;
+      group.state.sat = 200;
+      group.state.bri = 150;
+
+      endpoint = bridge.get('/groups/25').reply(200, group);
+
+      const { hue } = await query`{
+        hue {
+          group(id: 25) { color }
+        }
+      }`;
+
+      expect(hue.group.color).toBe(toHexColorCode(group.action));
+    });
+
+    it('understands temperature colors', async () => {
+      const group = createGroup();
+      group.state.colormode = colorTypes.TEMP;
+      group.state.bri = 100;
+      group.state.ct = 215;
+
+      endpoint = bridge.get('/groups/30').reply(200, group);
+
+      const { hue } = await query`{
+        hue {
+          group(id: 30) { color }
+        }
+      }`;
+
+      expect(hue.group.color).toBe(toHexColorCode(group.action));
+    });
+
+    it('understands XY colorspace', async () => {
+      const group = createGroup();
+      group.state.colormode = colorTypes.XY;
+      group.state.xy = [0.234, 0.567];
+
+      endpoint = bridge.get('/groups/35').reply(200, group);
+
+      const { hue } = await query`{
+        hue {
+          group(id: 35) { color }
+        }
+      }`;
+
+      expect(hue.group.color).toBe(toHexColorCode(group.action));
+    });
   });
 });

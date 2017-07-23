@@ -1,5 +1,5 @@
 import { bridge, query, createLight } from '../../test-utils';
-import { colorTypes } from '../light';
+import toHexColorCode, { colorTypes, BLACK } from '../../utils/color';
 
 describe('Light resolver', () => {
   let endpoint;
@@ -53,7 +53,7 @@ describe('Light resolver', () => {
         }
       }`;
 
-      expect(hue.light.color).toBe('#000000');
+      expect(hue.light.color).toBe(BLACK);
     });
 
     it('returns a hex code', async () => {
@@ -71,8 +71,7 @@ describe('Light resolver', () => {
         }
       }`;
 
-      expect(hue.light.color).toBeTruthy();
-      expect(hue.light.color).toMatchSnapshot();
+      expect(hue.light.color).toBe(toHexColorCode(light.state));
     });
 
     it('understands temperature colors', async () => {
@@ -89,8 +88,7 @@ describe('Light resolver', () => {
         }
       }`;
 
-      expect(hue.light.color).toBeTruthy();
-      expect(hue.light.color).toMatchSnapshot();
+      expect(hue.light.color).toBe(toHexColorCode(light.state));
     });
 
     it('understands XY colorspace', async () => {
@@ -106,8 +104,7 @@ describe('Light resolver', () => {
         }
       }`;
 
-      expect(hue.light.color).toBeTruthy();
-      expect(hue.light.color).toMatchSnapshot();
+      expect(hue.light.color).toBe(toHexColorCode(light.state));
     });
   });
 });

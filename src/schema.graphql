@@ -15,6 +15,9 @@ type LightGroup {
   allOn: Boolean
   class: String
   name: String
+
+  # 6-digit CSS color code.
+  color: String
 }
 
 # A hue-compatible wireless bulb.

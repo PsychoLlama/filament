@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Light resolver color returns a hex code 1`] = `"#962030"`;
-
-exports[`Light resolver color understands XY colorspace 1`] = `"#fffe76"`;
-
-exports[`Light resolver color understands temperature colors 1`] = `"#645764"`;

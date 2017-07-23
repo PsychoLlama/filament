@@ -1,18 +1,5 @@
 /* eslint-disable require-jsdoc */
-import Color from 'hue-colors';
-
-// Represents the type of color encoding last used.
-export const colorTypes = {
-  TEMP: 'ct',
-  HSB: 'hs',
-  XY: 'xy',
-};
-
-const colorExtractors = {
-  [colorTypes.HSB]: ({ hue, sat, bri }) => Color.fromHsb(hue, sat, bri),
-  [colorTypes.XY]: ({ xy, bri }) => Color.fromCIE(xy[0], xy[1], bri),
-  [colorTypes.TEMP]: ({ ct, bri }) => Color.fromCt(ct, bri),
-};
+import toHexColorCode, { BLACK } from '../utils/color';
 
 class Light {
   constructor (light, id) {
@@ -34,18 +21,7 @@ class Light {
    * @return {String} - A CSS hex color code.
    */
   color () {
-    const { colormode, on } = this.raw.state;
-
-    if (!on) {
-      return '#000000';
-    }
-
-    const colorExtractor = colorExtractors[colormode] ||
-      colorExtractors[colorTypes.HSB];
-
-    const color = colorExtractor(this.raw.state);
-
-    return `#${color.toHex()}`;
+    return this.on ? toHexColorCode(this.raw.state) : BLACK;
   }
 }
 

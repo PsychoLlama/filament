@@ -1,4 +1,5 @@
 /* eslint-disable require-jsdoc */
+import toHexColorCode, { BLACK } from '../utils/color';
 import resolveLight from './light';
 
 class LightGroup {
@@ -20,6 +21,10 @@ class LightGroup {
     ));
 
     return Promise.all(requests);
+  }
+
+  color () {
+    return this.anyOn ? toHexColorCode(this.raw.action) : BLACK;
   }
 }
 
