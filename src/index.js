@@ -1,9 +1,10 @@
 import graphqlHttp from 'express-graphql';
 import express from 'express';
+import schema from './schema';
 import rc from 'rc';
 
-import * as queries from './queries';
-import schema from './schema';
+import * as context from './context';
+import rootValue from './resolvers';
 
 const config = rc('filament', {
   host: '0.0.0.0',
@@ -13,7 +14,8 @@ const config = rc('filament', {
 
 const graphqlEndpoint = graphqlHttp({
   graphiql: config.graphiql === true,
-  rootValue: queries,
+  rootValue,
+  context,
   schema,
 });
 

@@ -1,17 +1,8 @@
-import { GraphQLSchema, GraphQLObjectType } from 'graphql';
+import { buildSchema } from 'graphql';
+import { readFileSync } from 'fs';
+import { join } from 'path';
 
-import * as mutations from './mutations';
-import * as queries from './queries';
+const schemaPath = join(__dirname, 'schema.graphql');
+const schemaFile = readFileSync(schemaPath, 'utf8');
 
-export default new GraphQLSchema({
-  query: new GraphQLObjectType({
-    description: 'Philips Hue GraphQL API Server',
-    fields: queries,
-    name: 'Query',
-  }),
-
-  mutation: new GraphQLObjectType({
-    fields: mutations,
-    name: 'Mutation',
-  }),
-});
+export default buildSchema(schemaFile);

@@ -1,12 +1,19 @@
 import { graphql } from 'graphql';
 import nock from 'nock';
 
-import { url } from '../utils';
-import schema from '../schema';
+import * as context from './context';
+import resolvers from './resolvers';
+import schema from './schema';
 
-export const query = ([request]) => graphql(schema, request);
+export const bridge = nock(context.huerl());
 
-export const bridge = nock(url());
+export const query = async ([request]) => {
+  const response = await graphql(schema, request, resolvers, context);
+
+  expect(response.errors).toBeUndefined();
+
+  return response.data;
+};
 
 export const createLight = (fields = {}) => ({
   uniqueid: '75:45:12:38:00:fa:0c:26-1b',
@@ -51,10 +58,9 @@ export const createGroup = (fields = {}) => ({
     ct: 250,
   },
 
-  state: {
-    'all_on': false,
-    'any_on': true,
-  },
+  /* eslint-disable camelcase */
+  state: { all_on: false, any_on: true },
+  /* eslint-enable camelcase */
 
   ...fields,
 });

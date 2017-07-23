@@ -1,0 +1,57 @@
+# The type of light hardware being used.
+enum LightGroupType {
+  LightSource
+  LightGroup
+  Luminaire
+  Room
+}
+
+# An arbitrary collection of lights.
+type LightGroup {
+  type: LightGroupType
+  recycle: Boolean
+  lights: [Light]
+  anyOn: Boolean
+  allOn: Boolean
+  class: String
+  name: String
+  id: ID
+
+  # 6-digit CSS color code. Changes when the group color is set all at once.
+  # Changing the color of one light won't affect it.
+  color: String
+}
+
+# A hue-compatible wireless bulb.
+type Light {
+  manufacturer: String
+  reachable: Boolean
+  version: String
+  model: String
+
+  # 6-digit CSS hex code.
+  color: String
+  name: String
+  type: String
+  on: Boolean
+
+  # A bridge-dependent ID used to interface with the light.
+  # May change if you register with a different bridge
+  # or restore it to factory defaults.
+  id: ID
+
+  # Identifies the light across multiple Hue bridges.
+  uniqueId: ID
+}
+
+# Queries for reading the state of hue lights.
+type Hue {
+  group(id: ID!): LightGroup
+  light(id: ID!): Light
+  groups: [LightGroup]
+  lights: [Light]
+}
+
+type Query {
+  hue: Hue
+}
