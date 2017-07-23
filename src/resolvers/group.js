@@ -3,14 +3,15 @@ import resolveLight from './light';
 
 class LightGroup {
   constructor (group) {
-    this.raw = group;
+    const { recycle, name, type } = group;
 
-    this.recycle = group.recycle;
-    this.class = group.class;
-    this.name = group.name;
-    this.type = group.type;
-    this.anyOn = group.state.any_on;
-    this.allOn = group.state.all_on;
+    Object.assign(this, { recycle, name, type }, {
+      allOn: group.state.all_on,
+      anyOn: group.state.any_on,
+      class: group.class,
+    });
+
+    this.raw = group;
   }
 
   async lights (args, context) {

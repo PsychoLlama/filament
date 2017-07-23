@@ -23,6 +23,9 @@ type Light {
   reachable: Boolean
   version: String
   model: String
+
+  # 6-digit CSS hex code.
+  color: String
   name: String
   type: String
   on: Boolean
