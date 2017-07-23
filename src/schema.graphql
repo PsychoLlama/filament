@@ -1,0 +1,11 @@
+type LightGroup {
+  name: String
+}
+
+type Hue {
+  group(id: Int!): LightGroup
+}
+
+type Query {
+  hue: Hue
+}

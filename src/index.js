@@ -1,9 +1,12 @@
 import graphqlHttp from 'express-graphql';
+import { buildSchema } from 'graphql';
+import { readFile } from 'fs';
 import express from 'express';
+import { join } from 'path';
 import rc from 'rc';
 
-import * as queries from './queries';
-import schema from './schema';
+import * as resolvers from './resolvers';
+import * as context from './context';
 
 const config = rc('filament', {
   host: '0.0.0.0',
@@ -11,13 +14,25 @@ const config = rc('filament', {
   port: 8080,
 });
 
-const graphqlEndpoint = graphqlHttp({
-  graphiql: config.graphiql === true,
-  rootValue: queries,
-  schema,
+const schemaPath = join(__dirname, 'schema.graphql');
+readFile(schemaPath, 'utf8', (error, result) => {
+  if (error) {
+    throw error;
+  }
+
+  const schema = buildSchema(result);
+  const graphqlEndpoint = graphqlHttp({
+    graphiql: config.graphiql === true,
+    context,
+    schema,
+
+    rootValue: {
+      hue: () => resolvers,
+    },
+  });
+
+  const app = express();
+  app.use(graphqlEndpoint);
+
+  app.listen(config.port, config.host);
 });
-
-const app = express();
-app.use(graphqlEndpoint);
-
-app.listen(config.port, config.host);

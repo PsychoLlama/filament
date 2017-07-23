@@ -11,7 +11,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "lint": "eslint src/",
-    "build": "babel src/ -d dist/ --ignore __mocks__,__tests__",
+    "build": "babel --copy-files src/ -d dist/ --ignore __mocks__,__tests__",
     "build:watch": "npm run build -- --watch",
     "start": "node .",
     "start:watch": "nodemon .",
@@ -22,6 +22,7 @@
     "express-graphql": "^0.6.4",
     "graphql": "^0.9.6",
     "hue-connect": "^0.1.2",
+    "invariant": "^2.2.2",
     "node-fetch": "^1.6.3",
     "rc": "^1.2.1"
   },
