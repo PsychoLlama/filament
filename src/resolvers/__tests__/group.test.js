@@ -46,13 +46,13 @@ describe('Group resolver', () => {
     const result = await query`{
       hue {
         group(id: 15) {
-          lights { name }
+          lights { name id }
         }
       }
     }`;
 
     expect(result.hue.group).toEqual({
-      lights: [{ name: light.name }],
+      lights: [{ name: light.name, id: '1' }],
     });
 
     lightEndpoint.done();

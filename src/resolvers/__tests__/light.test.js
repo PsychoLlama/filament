@@ -22,7 +22,7 @@ describe('Light resolver', () => {
     const data = await query`{
       hue {
         light(id: 35) {
-          name manufacturer version model type on reachable
+          name manufacturer version model type on reachable id uniqueId
         }
       }
     }`;
@@ -30,10 +30,12 @@ describe('Light resolver', () => {
     expect(data.hue.light).toEqual(expect.objectContaining({
       manufacturer: light.manufacturername,
       reachable: light.state.reachable,
+      uniqueId: light.uniqueid,
       version: light.swversion,
       model: light.modelid,
       on: light.state.on,
       type: light.type,
+      id: '35',
     }));
   });
 });

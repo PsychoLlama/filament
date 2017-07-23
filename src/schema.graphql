@@ -26,6 +26,14 @@ type Light {
   name: String
   type: String
   on: Boolean
+
+  # A bridge-dependent ID used to interface with the light.
+  # May change if you register with a different bridge
+  # or restore it to factory defaults.
+  id: ID
+
+  # Identifies the light across multiple Hue bridges.
+  uniqueId: ID
 }
 
 # Queries for reading the state of hue lights.
