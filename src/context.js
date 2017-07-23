@@ -36,11 +36,9 @@ const checkResultsForErrors = (results) => {
   }
 
   results.forEach((result) => {
-    if (!result || !result.error) {
-      return;
+    if (result && result.error) {
+      throw new HueError(result.error);
     }
-
-    throw new HueError(result.error);
   });
 
   return results;

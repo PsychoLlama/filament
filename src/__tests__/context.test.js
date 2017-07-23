@@ -105,6 +105,35 @@ describe('Hue http', () => {
       expect(error.address).toBe(actual.address);
       expect(error.code).toBe(actual.type);
     });
+
+    it('returns the results if the endpoint returns an array', async () => {
+      const results = [{ notAnError: true }];
+
+      fetch.mockImplementation(async () => ({
+        json: async () => results,
+      }));
+
+      const result = await hue.get('groups/4');
+
+      expect(result).toBe(results);
+    });
+
+    it('sets a default error message', async () => {
+      const spy = jest.fn();
+      const errors = [createError({ description: undefined })];
+
+      fetch.mockImplementation(async () => ({
+        json: async () => errors,
+      }));
+
+      await hue.get('groups/5').catch(spy);
+
+      expect(spy).toHaveBeenCalled();
+      const [error] = spy.mock.calls[0];
+
+      expect(error).toEqual(expect.any(HueError));
+      expect(error.message).toMatch(/mysterious/i);
+    });
   });
 
   describe('post()', () => {
