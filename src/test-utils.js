@@ -3,8 +3,9 @@ import nock from 'nock';
 
 import * as context from './context';
 import resolvers from './resolvers';
-import { url } from './utils';
 import schema from './schema';
+
+export const bridge = nock(context.huerl());
 
 export const query = async ([request]) => {
   const response = await graphql(schema, request, resolvers, context);
@@ -13,8 +14,6 @@ export const query = async ([request]) => {
 
   return response.data;
 };
-
-export const bridge = nock(url());
 
 export const createLight = (fields = {}) => ({
   uniqueid: '75:45:12:38:00:fa:0c:26-1b',
