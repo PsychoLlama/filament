@@ -6,6 +6,7 @@ enum LightGroupType {
   Room
 }
 
+# An arbitrary collection of lights.
 type LightGroup {
   type: LightGroupType
   recycle: Boolean
@@ -15,9 +16,21 @@ type LightGroup {
   name: String
 }
 
+# A hue-compatible wireless bulb.
+type Light {
+  manufacturer: String
+  reachable: Boolean
+  version: String
+  model: String
+  name: String
+  type: String
+  on: Boolean
+}
+
+# Queries for reading the state of hue lights.
 type Hue {
-  # A user-created group of hue lights.
-  group(id: Int!): LightGroup
+  group(id: ID!): LightGroup
+  light(id: ID!): Light
 }
 
 type Query {
