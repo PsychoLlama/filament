@@ -2,11 +2,11 @@
 import toHexColorCode, { BLACK } from '../utils/color';
 import resolveLight from './light';
 
-class LightGroup {
-  constructor (group) {
+export class LightGroup {
+  constructor (group, id) {
     const { recycle, name, type } = group;
 
-    Object.assign(this, { recycle, name, type }, {
+    Object.assign(this, { recycle, name, type, id }, {
       allOn: group.state.all_on,
       anyOn: group.state.any_on,
       class: group.class,
@@ -31,5 +31,5 @@ class LightGroup {
 export default async (args, context) => {
   const group = await context.hue.get(`groups/${args.id}`);
 
-  return new LightGroup(group);
+  return new LightGroup(group, args.id);
 };

@@ -7,6 +7,7 @@ Object {
       "allOn": false,
       "anyOn": true,
       "class": "Hallway",
+      "id": "10",
       "name": "Group name",
       "type": "Room",
     },

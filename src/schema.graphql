@@ -15,8 +15,10 @@ type LightGroup {
   allOn: Boolean
   class: String
   name: String
+  id: ID
 
-  # 6-digit CSS color code.
+  # 6-digit CSS color code. Changes when the group color is set all at once.
+  # Changing the color of one light won't affect it.
   color: String
 }
 
@@ -46,6 +48,7 @@ type Light {
 type Hue {
   group(id: ID!): LightGroup
   light(id: ID!): Light
+  groups: [LightGroup]
 }
 
 type Query {

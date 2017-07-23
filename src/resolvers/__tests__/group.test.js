@@ -30,7 +30,7 @@ describe('Group resolver', () => {
     const result = await query`{
       hue {
         group(id: 10) {
-          name type class anyOn allOn
+          name type class anyOn allOn id
         }
       }
     }`;
