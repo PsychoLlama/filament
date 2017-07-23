@@ -1,7 +1,5 @@
 import { bridge, query, createLight } from '../../test-utils';
 
-jest.unmock('node-fetch');
-
 describe('Light resolver', () => {
   let endpoint;
   afterEach(() => endpoint.done());

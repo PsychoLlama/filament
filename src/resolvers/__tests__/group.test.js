@@ -1,7 +1,6 @@
 import { query, bridge, createGroup } from '../../test-utils';
 
 jest.mock('../../../bridge.json');
-jest.unmock('node-fetch');
 
 describe('Group resolver', () => {
   let endpoint;

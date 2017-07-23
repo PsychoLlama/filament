@@ -3,7 +3,7 @@ import fetch from 'node-fetch';
 import { hue, huerl } from '../context';
 import bridge from '../../bridge';
 
-jest.mock('node-fetch');
+jest.mock('node-fetch', () => jest.fn());
 
 describe('Hue http', () => {
   afterEach(() => fetch.mockReset());
