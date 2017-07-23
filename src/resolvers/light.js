@@ -1,7 +1,7 @@
 /* eslint-disable require-jsdoc */
 import toHexColorCode, { BLACK } from '../utils/color';
 
-class Light {
+export class Light {
   constructor (light, id) {
     this.raw = light;
     const { name, type } = light;

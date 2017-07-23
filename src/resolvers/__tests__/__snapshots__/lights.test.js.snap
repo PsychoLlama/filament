@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Lights resolver contains all the light data 1`] = `
+Array [
+  Object {
+    "color": "#fffefc",
+    "id": "1",
+    "model": "LCT001",
+    "name": "Light name",
+    "on": true,
+    "reachable": true,
+    "type": "Extended color light",
+    "uniqueId": "75:45:12:38:00:fa:0c:26-1b",
+    "version": "5.23.1.13452",
+  },
+]
+`;
