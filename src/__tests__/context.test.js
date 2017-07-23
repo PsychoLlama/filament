@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 
-import { hue, huerl } from '../context';
+import { hue, huerl, HueError } from '../context';
 import bridge from '../../bridge';
 
 jest.mock('node-fetch', () => jest.fn());
@@ -11,6 +11,15 @@ describe('Hue http', () => {
     fetch.mockImplementation(async () => ({
       json: async () => ({ result: true }),
     }));
+  });
+
+  const createError = (merge = {}) => ({
+    error: {
+      type: 3,
+      address: '/lights/8',
+      description: 'resource, /lights/8, not available',
+      ...merge,
+    },
   });
 
   describe('url formatter', () => {
@@ -50,6 +59,18 @@ describe('Hue http', () => {
 
       expect(result).toEqual({ result: true });
     });
+
+    it('fails if the response contains errors', async () => {
+      const errors = [createError()];
+      fetch.mockImplementation(async () => ({
+        json: async () => errors,
+      }));
+
+      const spy = jest.fn();
+      await hue.put('lights/1', { name: 'New light name' }).catch(spy);
+
+      expect(spy).toHaveBeenCalledWith(expect.any(HueError));
+    });
   });
 
   describe('get()', () => {
@@ -63,6 +84,26 @@ describe('Hue http', () => {
       const result = await hue.get('groups/3');
 
       expect(result).toEqual({ result: true });
+    });
+
+    it('fails if the response contains an error', async () => {
+      const spy = jest.fn();
+      const errors = [createError()];
+
+      fetch.mockImplementation(async () => ({
+        json: async () => errors,
+      }));
+
+      await hue.get('groups/4').catch(spy);
+
+      expect(spy).toHaveBeenCalled();
+      const [error] = spy.mock.calls[0];
+      const actual = errors[0].error;
+
+      expect(error).toEqual(expect.any(HueError));
+      expect(error.message).toContain(actual.description);
+      expect(error.address).toBe(actual.address);
+      expect(error.code).toBe(actual.type);
     });
   });
 
@@ -81,6 +122,18 @@ describe('Hue http', () => {
       const data = await hue.post('lights', { id: 'another-light' });
 
       expect(data).toEqual({ result: true });
+    });
+
+    it('fails if the result contains an error', async () => {
+      const errors = [createError()];
+      fetch.mockImplementation(async () => ({
+        json: async () => errors,
+      }));
+
+      const spy = jest.fn();
+      await hue.post('lights', { id: 'cool-beans' }).catch(spy);
+
+      expect(spy).toHaveBeenCalledWith(expect.any(HueError));
     });
   });
 });

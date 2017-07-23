@@ -11,6 +11,41 @@ export const huerl = (path = '') => {
   return `http://${bridge.ip}/api/${bridge.token}/${path}`;
 };
 
+/**
+ * Massages data from Hue error responses.
+ * @class
+ */
+export class HueError extends Error {
+
+  /**
+   * @param  {Object} source - The error object returned from hue.
+   */
+  constructor (source) {
+    const { description = 'Mysterious, no error message.' } = source;
+
+    super(`Hue bridge: ${description}`);
+
+    this.address = source.address;
+    this.code = source.type;
+  }
+}
+
+const checkResultsForErrors = (results) => {
+  if (!Array.isArray(results)) {
+    return results;
+  }
+
+  results.forEach((result) => {
+    if (!result || !result.error) {
+      return;
+    }
+
+    throw new HueError(result.error);
+  });
+
+  return results;
+};
+
 export const hue = {
 
   /**
@@ -22,7 +57,9 @@ export const hue = {
     const url = huerl(path);
 
     const response = await fetch(url);
-    return response.json();
+    const json = await response.json();
+
+    return checkResultsForErrors(json);
   },
 
   /**
@@ -39,7 +76,9 @@ export const hue = {
       method: 'PUT',
     });
 
-    return response.json();
+    const json = await response.json();
+
+    return checkResultsForErrors(json);
   },
 
   /**
@@ -56,6 +95,8 @@ export const hue = {
       method: 'POST',
     });
 
-    return response.json();
+    const json = await response.json();
+
+    return checkResultsForErrors(json);
   },
 };
