@@ -1,14 +1,9 @@
-/**
- * Resolves a collection of groups.
- * @class
- */
-class LightGroup {
+/* eslint-disable require-jsdoc */
+import resolveLight from './light';
 
-  /**
-   * @param  {Object} group - All the group data.
-   */
+class LightGroup {
   constructor (group) {
-    this._data = group;
+    this.raw = group;
 
     this.recycle = group.recycle;
     this.class = group.class;
@@ -16,6 +11,14 @@ class LightGroup {
     this.type = group.type;
     this.anyOn = group.state.any_on;
     this.allOn = group.state.all_on;
+  }
+
+  async lights (args, context) {
+    const requests = this.raw.lights.map((id) => (
+      resolveLight({ id }, context)
+    ));
+
+    return Promise.all(requests);
   }
 }
 

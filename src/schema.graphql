@@ -10,6 +10,7 @@ enum LightGroupType {
 type LightGroup {
   type: LightGroupType
   recycle: Boolean
+  lights: [Light]
   anyOn: Boolean
   allOn: Boolean
   class: String

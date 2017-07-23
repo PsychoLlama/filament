@@ -1,4 +1,4 @@
-import { query, bridge, createGroup } from '../../test-utils';
+import { query, bridge, createGroup, createLight } from '../../test-utils';
 
 jest.mock('../../../bridge.json');
 
@@ -35,5 +35,26 @@ describe('Group resolver', () => {
     }`;
 
     expect(result).toMatchSnapshot();
+  });
+
+  it('resolves every light beneath', async () => {
+    const group = createGroup({ lights: [1] });
+    const light = createLight();
+    endpoint = bridge.get('/groups/15').reply(200, group);
+    const lightEndpoint = bridge.get('/lights/1').reply(200, light);
+
+    const result = await query`{
+      hue {
+        group(id: 15) {
+          lights { name }
+        }
+      }
+    }`;
+
+    expect(result.hue.group).toEqual({
+      lights: [{ name: light.name }],
+    });
+
+    lightEndpoint.done();
   });
 });
