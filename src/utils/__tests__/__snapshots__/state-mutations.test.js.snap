@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`State mutation handles the hex code correctly 1`] = `
+Object {
+  "bri": 254,
+  "hue": 0,
+  "sat": 0,
+}
+`;
