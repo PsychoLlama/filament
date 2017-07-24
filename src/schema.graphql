@@ -56,14 +56,15 @@ type Query {
   hue: Hue
 }
 
-input GroupState {
+input LightState {
   transition: Int
   color: String
   on: Boolean
 }
 
 type HueMutations {
-  setGroupState(id: ID! state: GroupState!): LightGroup
+  setGroupState(id: ID! state: LightState!): LightGroup
+  setLightState(id: ID! state: LightState!): Light
 }
 
 type Mutation {
