@@ -1,5 +1,4 @@
 import Color from 'hue-colors';
-import nock from 'nock';
 
 import { query, bridge, createGroup } from '../../test-utils';
 
