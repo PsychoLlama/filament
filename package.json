@@ -15,7 +15,15 @@
     "build:watch": "npm run build -- --watch",
     "start": "node .",
     "start:watch": "nodemon .",
-    "register": "node ./dist/bin/setup.js"
+    "register": "node ./dist/bin/setup.js",
+    "precommit": "lint-staged",
+    "prettier": "prettier --single-quote --trailing-comma all"
+  },
+  "lint-staged": {
+    "*.js": [
+      "npm run prettier -- --write",
+      "git add"
+    ]
   },
   "dependencies": {
     "express": "^4.15.2",
@@ -35,9 +43,13 @@
     "babel-preset-es2015-node": "^6.1.1",
     "eslint": "^3.19.0",
     "eslint-config-llama": "^3.0.0",
+    "eslint-config-prettier": "^2.3.0",
+    "husky": "^0.14.3",
     "jest": "^20.0.1",
+    "lint-staged": "^4.0.2",
     "nock": "^9.0.13",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "prettier": "^1.5.3"
   },
   "jest": {
     "testPathIgnorePatterns": [
