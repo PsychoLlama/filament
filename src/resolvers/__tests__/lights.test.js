@@ -2,14 +2,15 @@ import { query, bridge, createLight } from '../../test-utils';
 
 describe('Lights resolver', () => {
   let endpoint;
-  const createLights = (amount) => Array(amount)
-    .fill()
-    .map((stopThisMadness, id) => createLight({ id: id + 1 }))
-    .reduce((lights, light) => {
-      lights[light.id] = light;
+  const createLights = amount =>
+    Array(amount)
+      .fill()
+      .map((stopThisMadness, id) => createLight({ id: id + 1 }))
+      .reduce((lights, light) => {
+        lights[light.id] = light;
 
-      return lights;
-    }, {});
+        return lights;
+      }, {});
 
   afterEach(() => endpoint.done());
 
@@ -23,13 +24,16 @@ describe('Lights resolver', () => {
       }
     }`;
 
-    expect(hue.lights).toEqual([{
-      id: String(lights[1].id),
-      name: lights[1].name,
-    }, {
-      id: String(lights[2].id),
-      name: lights[2].name,
-    }]);
+    expect(hue.lights).toEqual([
+      {
+        id: String(lights[1].id),
+        name: lights[1].name,
+      },
+      {
+        id: String(lights[2].id),
+        name: lights[2].name,
+      },
+    ]);
   });
 
   it('contains all the light data', async () => {

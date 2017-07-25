@@ -27,7 +27,7 @@ const complete = ({ ip }, token) => {
  * @param  {Bridge} bridge - Hue bridge.
  * @return {Promise} - Resolves when the request finishes.
  */
-async function acquireToken (bridge) {
+async function acquireToken(bridge) {
   try {
     const token = await bridge.connect({
       deviceName: hostname(),

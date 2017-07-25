@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle, no-sync */
 import discover from 'hue-connect';
-import {join} from 'path';
+import { join } from 'path';
 import fs from 'fs';
 
 import '../setup';
@@ -83,10 +83,14 @@ describe('Bridge setup', () => {
     const bridge = createBridge();
     await callback(bridge);
 
-    const deets = JSON.stringify({
-      token: await token,
-      ip: bridge.ip,
-    }, null, 2);
+    const deets = JSON.stringify(
+      {
+        token: await token,
+        ip: bridge.ip,
+      },
+      null,
+      2,
+    );
 
     expect(fs.writeFileSync).toHaveBeenCalledWith(
       join(__dirname, '../../../bridge.json'),

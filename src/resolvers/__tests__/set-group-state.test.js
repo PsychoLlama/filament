@@ -28,9 +28,12 @@ describe('Group state mutation', () => {
     }`;
 
     expect(hue.group).toEqual({ allOn: group.state.all_on });
-    expect(spy).toHaveBeenCalledWith(expect.any(String), JSON.stringify({
-      on: true,
-    }));
+    expect(spy).toHaveBeenCalledWith(
+      expect.any(String),
+      JSON.stringify({
+        on: true,
+      }),
+    );
   });
 
   it('sets the transition time', async () => {

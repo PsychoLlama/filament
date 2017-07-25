@@ -3,27 +3,29 @@ import toHexColorCode, { BLACK } from '../utils/color';
 import resolveLight from './light';
 
 export class LightGroup {
-  constructor (group, id) {
+  constructor(group, id) {
     const { recycle, name, type } = group;
 
-    Object.assign(this, { recycle, name, type, id }, {
-      allOn: group.state.all_on,
-      anyOn: group.state.any_on,
-      class: group.class,
-    });
+    Object.assign(
+      this,
+      { recycle, name, type, id },
+      {
+        allOn: group.state.all_on,
+        anyOn: group.state.any_on,
+        class: group.class,
+      },
+    );
 
     this.raw = group;
   }
 
-  async lights (args, context) {
-    const requests = this.raw.lights.map((id) => (
-      resolveLight({ id }, context)
-    ));
+  async lights(args, context) {
+    const requests = this.raw.lights.map(id => resolveLight({ id }, context));
 
     return Promise.all(requests);
   }
 
-  color () {
+  color() {
     return this.anyOn ? toHexColorCode(this.raw.action) : BLACK;
   }
 }
