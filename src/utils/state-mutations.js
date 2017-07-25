@@ -3,7 +3,7 @@ import Color from 'hue-colors';
 
 const hexValidator = /^#[0-9a-f]{6}$/i;
 
-const normalizeHexColor = (color) => {
+const normalizeHexColor = color => {
   const hex = color.toLowerCase();
 
   invariant(hex[0] === '#', 'Invalid hex code, missing the hash symbol (#)');
@@ -13,7 +13,7 @@ const normalizeHexColor = (color) => {
   return hex.slice(1);
 };
 
-export default (mutation) => {
+export default mutation => {
   const { transition, color, ...patch } = mutation;
 
   // Transitions are multiples of 100ms.

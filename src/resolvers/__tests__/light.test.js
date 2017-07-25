@@ -28,16 +28,18 @@ describe('Light resolver', () => {
       }
     }`;
 
-    expect(data.hue.light).toEqual(expect.objectContaining({
-      manufacturer: light.manufacturername,
-      reachable: light.state.reachable,
-      uniqueId: light.uniqueid,
-      version: light.swversion,
-      model: light.modelid,
-      on: light.state.on,
-      type: light.type,
-      id: '35',
-    }));
+    expect(data.hue.light).toEqual(
+      expect.objectContaining({
+        manufacturer: light.manufacturername,
+        reachable: light.state.reachable,
+        uniqueId: light.uniqueid,
+        version: light.swversion,
+        model: light.modelid,
+        on: light.state.on,
+        type: light.type,
+        id: '35',
+      }),
+    );
   });
 
   describe('color', () => {

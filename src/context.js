@@ -5,8 +5,10 @@ import bridge from '../bridge.json';
 
 // It's a Hue-RL (just like a URL, but a HueRL).
 export const huerl = (path = '') => {
-  invariant(typeof path === 'string',
-    `Hue URL path is invalid. Got "${path}".`);
+  invariant(
+    typeof path === 'string',
+    `Hue URL path is invalid. Got "${path}".`,
+  );
 
   return `http://${bridge.ip}/api/${bridge.token}/${path}`;
 };
@@ -16,11 +18,10 @@ export const huerl = (path = '') => {
  * @class
  */
 export class HueError extends Error {
-
   /**
    * @param  {Object} source - The error object returned from hue.
    */
-  constructor (source) {
+  constructor(source) {
     const { description = 'Mysterious, no error message.' } = source;
 
     super(`Hue bridge: ${description}`);
@@ -30,12 +31,12 @@ export class HueError extends Error {
   }
 }
 
-const checkResultsForErrors = (results) => {
+const checkResultsForErrors = results => {
   if (!Array.isArray(results)) {
     return results;
   }
 
-  results.forEach((result) => {
+  results.forEach(result => {
     if (result && result.error) {
       throw new HueError(result.error);
     }
@@ -45,13 +46,12 @@ const checkResultsForErrors = (results) => {
 };
 
 export const hue = {
-
   /**
    * GET request to hue.
    * @param  {String} [path] - Relative URL path.
    * @return {Promise<Object>} - HTTP response.
    */
-  get: async (path) => {
+  get: async path => {
     const url = huerl(path);
 
     const response = await fetch(url);

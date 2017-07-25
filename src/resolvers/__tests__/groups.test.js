@@ -4,14 +4,15 @@ describe('Groups resolver', () => {
   let endpoint;
   afterEach(() => endpoint.done());
 
-  const createGroups = (amount) => Array(amount)
-    .fill()
-    .map((goAwayUndefined, id) => createGroup({ id: id + 1 }))
-    .reduce((groups, group) => {
-      groups[group.id] = group;
+  const createGroups = amount =>
+    Array(amount)
+      .fill()
+      .map((goAwayUndefined, id) => createGroup({ id: id + 1 }))
+      .reduce((groups, group) => {
+        groups[group.id] = group;
 
-      return groups;
-    }, {});
+        return groups;
+      }, {});
 
   it('contains basic info', async () => {
     const groups = createGroups(2);
@@ -24,13 +25,16 @@ describe('Groups resolver', () => {
       }
     }`;
 
-    expect(hue.groups).toEqual([{
-      id: String(groups[1].id),
-      name: groups[1].name,
-    }, {
-      id: String(groups[2].id),
-      name: groups[2].name,
-    }]);
+    expect(hue.groups).toEqual([
+      {
+        id: String(groups[1].id),
+        name: groups[1].name,
+      },
+      {
+        id: String(groups[2].id),
+        name: groups[2].name,
+      },
+    ]);
   });
 
   it('contains all the data from each group', async () => {

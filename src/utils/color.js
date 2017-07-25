@@ -13,7 +13,6 @@ export const colorTypes = {
 
 // A map of color encodings to their hex code converters.
 export const colorExtractors = {
-
   // Hue, saturation, brightness.
   [colorTypes.HSB]: ({ hue, sat, bri }) => {
     invariant(typeof hue === 'number', 'Missing hue value');
@@ -51,11 +50,10 @@ export const colorExtractors = {
  * @param  {Number} state.bri - Brightness.
  * @return {String} - CSS hex color code, hash character and all.
  */
-export default (state) => {
-
+export default state => {
   // Default to HSB just in case Philips adds another color mode.
-  const extractor = colorExtractors[state.colormode] ||
-    colorExtractors[colorTypes.HSB];
+  const extractor =
+    colorExtractors[state.colormode] || colorExtractors[colorTypes.HSB];
 
   // Bless you, hue-colors. Bless you.
   const hexColorCode = extractor(state).toHex();
