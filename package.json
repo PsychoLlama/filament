@@ -14,7 +14,7 @@
     "build": "babel --copy-files src/ -d dist/ --ignore __mocks__,__tests__",
     "build:watch": "npm run build -- --watch",
     "start": "node .",
-    "start:watch": "nodemon .",
+    "start:watch": "nodemon . -e js,graphql",
     "register": "node ./dist/bin/setup.js",
     "precommit": "lint-staged",
     "prettier": "prettier --single-quote --trailing-comma all"
