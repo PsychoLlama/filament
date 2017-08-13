@@ -13,7 +13,7 @@
     "lint": "eslint src/",
     "build": "babel --copy-files src/ -d dist/ --ignore __mocks__,__tests__",
     "build:watch": "npm run build -- --watch",
-    "start": "pm2 start .",
+    "start": "pm2 start --no-daemon .",
     "start:watch": "nodemon . -e js,graphql",
     "register": "hue-register filament > bridge.json",
     "precommit": "lint-staged",
