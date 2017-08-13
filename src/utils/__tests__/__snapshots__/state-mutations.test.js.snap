@@ -7,3 +7,19 @@ Object {
   "sat": 0,
 }
 `;
+
+exports[`State mutation works with hsl color functions 1`] = `
+Object {
+  "bri": 77,
+  "hue": -5461,
+  "sat": 172,
+}
+`;
+
+exports[`State mutation works with rgb() color functions 1`] = `
+Object {
+  "bri": 254,
+  "hue": 5201,
+  "sat": 105,
+}
+`;

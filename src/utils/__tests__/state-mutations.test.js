@@ -25,23 +25,24 @@ describe('State mutation', () => {
     expect(result).toEqual({ hue, sat, bri, on: true });
   });
 
-  it('throws if the hash symbol is omitted', () => {
-    const fail = () => mutation({ color: 'ffffff' });
+  it('works with rgb() color functions', () => {
+    const color = 'rgb(255, 200, 150)';
+    const result = mutation({ color });
 
-    expect(fail).toThrow(/(hash|#)/i);
+    expect(result).toMatchSnapshot();
   });
 
-  it('throws if the color length is unexpected', () => {
-    const fail = () => mutation({ color: '#1234567' });
+  it('works with hsl color functions', () => {
+    const color = 'hsl(330, 50%, 20%)';
+    const result = mutation({ color });
 
-    expect(fail).toThrow(/length/);
-    expect(fail).toThrow(/7/);
+    expect(result).toMatchSnapshot();
   });
 
-  it('throws if the color characters are invalid', () => {
-    const fail = () => mutation({ color: '#0agz%.' });
+  it('works with color names', () => {
+    const result = mutation({ color: 'white' });
 
-    expect(fail).toThrow(/character/i);
+    expect(result).toEqual({ bri: 254, hue: 0, sat: 0 });
   });
 
   it('handles the hex code correctly', () => {
