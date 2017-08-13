@@ -1,6 +1,6 @@
-FROM node:alpine
+FROM node:boron
 
 COPY . /var/filament
 WORKDIR /var/filament
 
-CMD ["npm", "run", "start"]
+CMD ["./start-app-after-postgres.sh"]
