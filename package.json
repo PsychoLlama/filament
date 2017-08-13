@@ -26,13 +26,13 @@
     ]
   },
   "dependencies": {
-    "express": "^4.15.2",
-    "express-graphql": "^0.6.4",
-    "graphql": "^0.9.6",
+    "express": "^4.15.4",
+    "express-graphql": "^0.6.7",
+    "graphql": "^0.10.5",
     "hue-colors": "^0.5.0",
-    "hue-connect": "^0.1.2",
+    "hue-connect": "^0.2.0",
     "invariant": "^2.2.2",
-    "node-fetch": "^1.6.3",
+    "node-fetch": "^1.7.2",
     "rc": "^1.2.1"
   },
   "devDependencies": {
@@ -41,13 +41,13 @@
     "babel-plugin-transform-async-to-generator": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-preset-es2015-node": "^6.1.1",
-    "eslint": "^3.19.0",
+    "eslint": "^4.4.1",
     "eslint-config-llama": "^3.0.0",
     "eslint-config-prettier": "^2.3.0",
     "husky": "^0.14.3",
-    "jest": "^20.0.1",
-    "lint-staged": "^4.0.2",
-    "nock": "^9.0.13",
+    "jest": "^20.0.4",
+    "lint-staged": "^4.0.3",
+    "nock": "^9.0.14",
     "nodemon": "^1.11.0",
     "prettier": "^1.5.3"
   },
