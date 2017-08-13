@@ -16,7 +16,6 @@ type LightGroup {
   class: String
   name: String
   id: ID
-
   # 6-digit CSS color code. Changes when the group color is set all at once.
   # Changing the color of one light won't affect it.
   color: String
@@ -28,18 +27,15 @@ type Light {
   reachable: Boolean
   version: String
   model: String
-
   # 6-digit CSS hex code.
   color: String
   name: String
   type: String
   on: Boolean
-
   # A bridge-dependent ID used to interface with the light.
   # May change if you register with a different bridge
   # or restore it to factory defaults.
   id: ID
-
   # Identifies the light across multiple Hue bridges.
   uniqueId: ID
 }
@@ -63,8 +59,8 @@ input LightState {
 }
 
 type HueMutations {
-  setGroupState(id: ID! state: LightState!): LightGroup
-  setLightState(id: ID! state: LightState!): Light
+  setGroupState(id: ID!, state: LightState!): LightGroup
+  setLightState(id: ID!, state: LightState!): Light
 }
 
 type Mutation {
