@@ -13,7 +13,7 @@
     "lint": "eslint src/",
     "build": "babel --copy-files src/ -d dist/ --ignore __mocks__,__tests__",
     "build:watch": "npm run build -- --watch",
-    "start": "node .",
+    "start": "pm2 start .",
     "start:watch": "nodemon . -e js,graphql",
     "register": "hue-register filament > bridge.json",
     "precommit": "lint-staged",
@@ -21,6 +21,10 @@
   },
   "lint-staged": {
     "*.js": [
+      "npm run prettier -- --write",
+      "git add"
+    ],
+    "*.graphql": [
       "npm run prettier -- --write",
       "git add"
     ]
@@ -33,6 +37,7 @@
     "hue-connect": "^0.2.0",
     "invariant": "^2.2.2",
     "node-fetch": "^1.7.2",
+    "pm2": "^2.6.1",
     "rc": "^1.2.1",
     "tinycolor2": "^1.4.1"
   },
