@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  filament:
+    build: .
+    environment:
+      - NODE_ENV=production
+      - filament_port=80
+    ports:
+      - "80:80"
