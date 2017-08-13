@@ -15,7 +15,7 @@
     "build:watch": "npm run build -- --watch",
     "start": "node .",
     "start:watch": "nodemon . -e js,graphql",
-    "register": "node ./dist/bin/setup.js",
+    "register": "hue-register filament > bridge.json",
     "precommit": "lint-staged",
     "prettier": "prettier --single-quote --trailing-comma all"
   },
