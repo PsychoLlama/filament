@@ -1,5 +1,3 @@
-import Color from 'hue-colors';
-
 import mutation from '../state-mutations';
 
 describe('State mutation', () => {
@@ -20,9 +18,7 @@ describe('State mutation', () => {
     const color = '#FF00FF';
     const result = mutation({ color, on: true });
 
-    const [hue, sat, bri] = Color.fromHex('ff00ff').toHsb();
-
-    expect(result).toEqual({ hue, sat, bri, on: true });
+    expect(result).toMatchSnapshot();
   });
 
   it('works with rgb() color functions', () => {
@@ -57,5 +53,18 @@ describe('State mutation', () => {
     expect(isNaN(result.bri)).toBe(false);
 
     expect(result).toMatchSnapshot();
+  });
+
+  it('ensures the hue is properly adjusted', () => {
+    const result = mutation({ color: 'purple' });
+
+    expect(result.hue).toBeGreaterThan(0);
+    expect(result.hue).toBeLessThanOrEqual(0xffff);
+  });
+
+  it('throws if the color is invalid', () => {
+    const fail = () => mutation({ color: 'potato' });
+
+    expect(fail).toThrow(/color/);
   });
 });

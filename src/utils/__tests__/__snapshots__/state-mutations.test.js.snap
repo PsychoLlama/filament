@@ -1,5 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`State mutation formats color 1`] = `
+Object {
+  "bri": 254,
+  "hue": 54613,
+  "on": true,
+  "sat": 254,
+}
+`;
+
 exports[`State mutation handles the hex code correctly 1`] = `
 Object {
   "bri": 254,
@@ -11,7 +20,7 @@ Object {
 exports[`State mutation works with hsl color functions 1`] = `
 Object {
   "bri": 77,
-  "hue": -5461,
+  "hue": 60074,
   "sat": 172,
 }
 `;

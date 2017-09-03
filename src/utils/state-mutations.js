@@ -1,5 +1,14 @@
 import tinycolor from 'tinycolor2';
 import HueColor from 'hue-colors';
+import assert from 'assert';
+
+// Sometimes results in negative numbers,
+// and not always less than 0xffff.
+const normalizeHue = hue => {
+  const sum = hue < 0 ? 0xffff + hue : hue;
+
+  return sum % 0xffff;
+};
 
 export default mutation => {
   const { transition, color, ...patch } = mutation;
@@ -11,9 +20,13 @@ export default mutation => {
 
   // Turn hex codes into hue-friendly HSB.
   if (typeof color === 'string') {
-    const hex = tinycolor(color).toHex();
+    const colorValue = tinycolor(color);
+    assert(colorValue.isValid(), `Invalid color '${color}'`);
+
+    const hex = colorValue.toHex();
     const [hue = 0, sat, bri] = HueColor.fromHex(hex).toHsb();
-    Object.assign(patch, { hue, sat, bri });
+
+    Object.assign(patch, { sat, bri, hue: normalizeHue(hue) });
   }
 
   return patch;
