@@ -12,7 +12,8 @@ Assuming you've got some lights, do these things:
 1. Clone this repo
 2. Install (`npm install` or `yarn install` or whatever the cool kids do these days)
 3. Do `yarn register`. That'll poll your Hue bridge until you press the link button
-4. `yarn start` :tada:
+4. `yarn build`
+5. `yarn start` :tada:
 
 Open your browser to `localhost:8080` and try some queries!
 
@@ -24,6 +25,7 @@ npm install
 
 echo "Press the giant button on your Hue bridge"
 npm run register
+npm run build
 npm start
 ```
 
