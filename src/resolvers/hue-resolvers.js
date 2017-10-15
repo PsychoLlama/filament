@@ -6,3 +6,4 @@ export { default as lights } from './lights';
 
 export { default as setGroupState } from './set-group-state';
 export { default as setLightState } from './set-light-state';
+export { default as setLightAttributes } from './set-light-attributes';

@@ -58,9 +58,14 @@ input LightState {
   on: Boolean
 }
 
+input LightAttributes {
+  name: String
+}
+
 type HueMutations {
   setGroupState(id: ID!, state: LightState!): LightGroup
   setLightState(id: ID!, state: LightState!): Light
+  setLightAttributes(id: ID!, attributes: LightAttributes!): Light
 }
 
 type Mutation {
