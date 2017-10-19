@@ -3,7 +3,7 @@ import { isValid as isValidRoom } from './room';
 import { sentenceCase } from 'change-case';
 
 export default mutation => {
-  const { name, class: _class, ...patch } = mutation;
+  const { name, class: _class, lights, ...patch } = mutation;
 
   if (typeof name === 'string') {
     assert(name.length <= 32, 'Name must be 32 characters or less');
@@ -17,6 +17,15 @@ export default mutation => {
     assert(isValidRoom(casedClass), 'Class must be a valid room');
 
     Object.assign(patch, { class: casedClass });
+  }
+
+  if (Array.isArray(lights)) {
+    assert(
+      lights.every(lightId => lightId !== ''),
+      'Lights list contains empty string',
+    );
+
+    Object.assign(patch, { lights });
   }
 
   return patch;

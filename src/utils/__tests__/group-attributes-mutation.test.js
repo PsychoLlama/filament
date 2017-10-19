@@ -40,4 +40,17 @@ describe('Group attributes mutation', () => {
 
     expect(fail).toThrow(/class/i);
   });
+
+  it('accepts valid lights values', () => {
+    const data = { lights: ['1', '2', '3'] };
+    const result = mutation(data);
+
+    expect(result).toEqual(data);
+  });
+
+  it('throws if the lights list contains empty strings', () => {
+    const fail = () => mutation({ lights: ['1', '2', ''] });
+
+    expect(fail).toThrow(/lights/i);
+  });
 });

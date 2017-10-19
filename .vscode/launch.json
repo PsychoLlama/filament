@@ -9,6 +9,19 @@
       "request": "launch",
       "name": "Launch Program",
       "program": "${workspaceFolder}\\dist\\index.js"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Jest Tests",
+      "program": "${workspaceRoot}\\node_modules\\jest\\bin\\jest.js",
+      "args": [
+          "-i"
+      ],
+      "internalConsoleOptions": "openOnSessionStart",
+      "outFiles": [
+          "${workspaceRoot}/dist/**/*"
+      ]
     }
   ]
 }
