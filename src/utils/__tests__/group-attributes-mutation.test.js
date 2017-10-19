@@ -20,4 +20,24 @@ describe('Group attributes mutation', () => {
 
     expect(fail).toThrow(/name/i);
   });
+
+  it('accepts valid single-word class values', () => {
+    const data = { class: 'Bedroom' };
+    const result = mutation(data);
+
+    expect(result).toEqual(data);
+  });
+
+  it('accepts valid multi-word class values', () => {
+    const data = { class: 'LivingRoom' };
+    const result = mutation(data);
+
+    expect(result).toEqual({ class: 'Living room' });
+  });
+
+  it('throws if the class is invalid', () => {
+    const fail = () => mutation({ class: 'FooBar' });
+
+    expect(fail).toThrow(/class/i);
+  });
 });

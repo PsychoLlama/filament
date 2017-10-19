@@ -6,6 +6,29 @@ enum LightGroupType {
   Room
 }
 
+# The room class of a Room light group.
+enum RoomClass {
+  LivingRoom
+  Kitchen
+  Dining
+  Bedroom
+  KidsBedroom
+  Bathroom
+  Nursery
+  Recreation
+  Office
+  Gym
+  Hallway
+  Toilet
+  FrontDoor
+  Garage
+  Terrace
+  Garden
+  Driveway
+  Carport
+  Other
+}
+
 # An arbitrary collection of lights.
 type LightGroup {
   type: LightGroupType
@@ -64,6 +87,7 @@ input LightAttributes {
 
 input LightGroupAttributes {
   name: String
+  class: RoomClass
 }
 
 type HueMutations {
