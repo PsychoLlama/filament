@@ -19,7 +19,7 @@ export const validRooms = [
   'Garden',
   'Driveway',
   'Carport',
-  'Other'
-]
+  'Other',
+];
 
-export const isValid = room => validRooms.includes(room)
+export const isValid = room => validRooms.includes(room);
