@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { isValid as isValidRoom } from './room';
+import { validRooms } from './room';
 import { sentenceCase } from 'change-case';
 
 export default mutation => {
@@ -14,7 +14,7 @@ export default mutation => {
   if (typeof _class === 'string') {
     // Convert enum value to the case the API requires
     const casedClass = sentenceCase(_class);
-    assert(isValidRoom(casedClass), 'Class must be a valid room');
+    assert(validRooms.has(casedClass), 'Class must be a valid room');
 
     Object.assign(patch, { class: casedClass });
   }
