@@ -6,6 +6,29 @@ enum LightGroupType {
   Room
 }
 
+# The room class of a Room light group.
+enum RoomClass {
+  LivingRoom
+  Kitchen
+  Dining
+  Bedroom
+  KidsBedroom
+  Bathroom
+  Nursery
+  Recreation
+  Office
+  Gym
+  Hallway
+  Toilet
+  FrontDoor
+  Garage
+  Terrace
+  Garden
+  Driveway
+  Carport
+  Other
+}
+
 # An arbitrary collection of lights.
 type LightGroup {
   type: LightGroupType
@@ -58,9 +81,21 @@ input LightState {
   on: Boolean
 }
 
+input LightAttributes {
+  name: String
+}
+
+input LightGroupAttributes {
+  name: String
+  class: RoomClass
+  lights: [ID!]
+}
+
 type HueMutations {
   setGroupState(id: ID!, state: LightState!): LightGroup
   setLightState(id: ID!, state: LightState!): Light
+  setLightAttributes(id: ID!, attributes: LightAttributes!): Light
+  setGroupAttributes(id: ID!, attributes: LightGroupAttributes!): LightGroup
 }
 
 type Mutation {
