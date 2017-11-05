@@ -63,8 +63,8 @@ npm start
 - :x: Get all Schedules
 
 ### Scenes
-- :x: Get a Scene by ID
-- :x: Get all Scenes
+- :white_check_mark: Get a Scene by ID
+- :white_check_mark: Get all Scenes
 
 ### Sensors
 - :x: Get a Sensor by ID

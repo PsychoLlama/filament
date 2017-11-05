@@ -72,6 +72,7 @@ type Scene {
   # by a schedule or sensor.
   locked: Boolean
   owner: String
+  picture: String
   recycle: Boolean
   lastUpdated: String
   version: Int
@@ -82,6 +83,7 @@ type Scene {
 type Hue {
   group(id: ID!): LightGroup
   light(id: ID!): Light
+  scene(id: ID!): Scene
   groups: [LightGroup]
   lights: [Light]
   scenes: [Scene]
