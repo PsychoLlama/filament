@@ -79,13 +79,30 @@ type Scene {
   id: ID
 }
 
+enum ScheduleStatus {
+  enabled
+  disabled
+}
+
+type Schedule {
+  status: ScheduleStatus
+  description: String
+  localTime: String
+  recycle: Boolean
+  created: String
+  name: String
+  time: String
+  id: ID
+}
+
 type Query {
   group(id: ID!): LightGroup
-  light(id: ID!): Light
-  scene(id: ID!): Scene
   groups: [LightGroup]
+  light(id: ID!): Light
   lights: [Light]
+  scene(id: ID!): Scene
   scenes: [Scene]
+  schedules: [Schedule]
 }
 
 input LightState {

@@ -5,6 +5,7 @@ export { default as scene } from './scene';
 export { default as groups } from './groups';
 export { default as lights } from './lights';
 export { default as scenes } from './scenes';
+export { default as schedules } from './schedules';
 
 export { default as setGroupState } from './set-group-state';
 export { default as setLightState } from './set-light-state';

@@ -87,3 +87,27 @@ export const createScenes = fields => ({
 
   ...fields,
 });
+
+export const createSchedule = fields => ({
+  created: '2017-10-31T13:45:56',
+  localtime: 'W124/T07:45:00',
+  description: 'MyRoutine',
+  time: 'W124/T13:45:00',
+  name: 'Morning Alarm',
+  status: 'enabled',
+  recycle: true,
+  command: {
+    address: '/api/t0k3n/groups/11/state',
+    body: { on: true },
+    method: 'PUT',
+  },
+
+  ...fields,
+});
+
+export const createSchedules = fields => ({
+  1: createSchedule(),
+  2: createSchedule(),
+
+  ...fields,
+});
