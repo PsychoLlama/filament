@@ -63,12 +63,28 @@ type Light {
   uniqueId: ID
 }
 
+type Scene {
+  # Lights affected by the scene.
+  lights: [Light]
+  # Human friendly scene title.
+  name: String
+  # False if the scene can be deleted. Otherwise, it's in use
+  # by a schedule or sensor.
+  locked: Boolean
+  owner: String
+  recycle: Boolean
+  lastUpdated: String
+  version: Int
+  id: ID
+}
+
 # Queries for reading the state of hue lights.
 type Hue {
   group(id: ID!): LightGroup
   light(id: ID!): Light
   groups: [LightGroup]
   lights: [Light]
+  scenes: [Scene]
 }
 
 type Query {

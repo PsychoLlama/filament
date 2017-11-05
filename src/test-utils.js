@@ -64,3 +64,19 @@ export const createGroup = (fields = {}) => ({
 
   ...fields,
 });
+
+export const createScenes = (fields = {}) => ({
+  KseUksCEskA9Al2: {
+    owner: 'kn82nNLskEnks208Nla32LnLkndaekuDNKnsnks8',
+    lastupdated: '2017-10-30T02:10:46',
+    appdata: { version: 1 },
+    lights: ['41', '42'],
+    name: 'Fall Colors',
+    recycle: false,
+    locked: false,
+    picture: '',
+    version: 2,
+  },
+
+  ...fields,
+});
