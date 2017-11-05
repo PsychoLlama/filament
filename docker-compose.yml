@@ -2,11 +2,13 @@ version: '3'
 
 services:
   db:
+    restart: unless-stopped
     image: postgres
     environment:
       - PGPORT=5432
 
   filament:
+    restart: unless-stopped
     build: .
     depends_on:
       - db
