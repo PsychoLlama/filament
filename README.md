@@ -59,8 +59,8 @@ npm start
 - :x: Get a Luminaire Group's unique ID
 
 ### Schedules
-- :x: Get a Schedule by ID
-- :x: Get all Schedules
+- :white_check_mark: Get a Schedule by ID
+- :white_check_mark: Get all Schedules <span style="font-size: 0.8em;">[\[3\]](#notes)</span>
 
 ### Scenes
 - :white_check_mark: Get a Scene by ID
@@ -142,6 +142,8 @@ npm start
 \[1\]: The alert state provided by the Hue API contains the last alert sent to the light and not its current state (i.e. whether an alert is active), so this isn't particularly useful.
 
 \[2\]: Deleting lights [can be messy](https://developers.meethue.com/documentation/delete-devices-application-guidance) and we haven't needed it, so we haven't added this yet.
+
+\[3\]: Due to some limitations of GraphQL, the `schedule.command.body` field isn't exposed yet.
 
 ## Disclaimer
 I'm not affiliated with Philips in any way. I'm just a guy on the internet playing with code :heart:
