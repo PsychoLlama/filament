@@ -1,4 +1,4 @@
-import { query, bridge, createScenes, createLight } from '../../test-utils';
+import { query, bridge, createScenes } from '../../test-utils';
 
 describe('Scenes resolver', () => {
   let scenes, endpoint;
@@ -44,17 +44,18 @@ describe('Scenes resolver', () => {
     const result = await query`{
       hue {
         scenes {
-          id name owner locked version recycle lastUpdated
+          id name owner locked version recycle lastUpdated picture
         }
       }
     }`;
 
     const [id] = Object.keys(scenes);
-    const { name, owner, recycle, locked, version } = scenes[id];
+    const { name, owner, recycle, locked, version, picture } = scenes[id];
     expect(result.hue.scenes).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
           lastUpdated: scenes[id].lastupdated,
+          picture,
           recycle,
           version,
           locked,
@@ -63,33 +64,5 @@ describe('Scenes resolver', () => {
         }),
       ]),
     );
-  });
-
-  it('resolves light data when requested', async () => {
-    const endpoints = [
-      bridge.get('/lights/41').reply(200, createLight()),
-      bridge.get('/lights/42').reply(200, createLight()),
-    ];
-
-    const result = await query`{
-      hue {
-        scenes {
-          lights { id name }
-        }
-      }
-    }`;
-
-    expect(result.hue.scenes).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          lights: [
-            { id: '41', name: 'Light name' },
-            { id: '42', name: 'Light name' },
-          ],
-        }),
-      ]),
-    );
-
-    endpoints.forEach(endpoint => endpoint.done());
   });
 });
