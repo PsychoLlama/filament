@@ -1,13 +1,16 @@
 import fetch from 'node-fetch';
 
-import { hue, huerl, HueError } from '../context';
+import { createHueLoaders, huerl, HueError } from '../context';
 import bridge from '../../bridge';
 
 jest.mock('node-fetch', () => jest.fn());
 
 describe('Hue http', () => {
+  let hue;
+
   afterEach(() => fetch.mockReset());
   beforeEach(() => {
+    hue = createHueLoaders();
     fetch.mockImplementation(async () => ({
       json: async () => ({ result: true }),
     }));
@@ -74,8 +77,8 @@ describe('Hue http', () => {
   });
 
   describe('get()', () => {
-    it('sends a fetch action', () => {
-      hue.get('groups/2');
+    it('sends a fetch action', async () => {
+      await hue.get('groups/2');
 
       expect(fetch).toHaveBeenCalledWith(huerl('groups/2'));
     });
@@ -133,6 +136,16 @@ describe('Hue http', () => {
 
       expect(error).toEqual(expect.any(HueError));
       expect(error.message).toMatch(/mysterious/i);
+    });
+
+    it('does not request the same resource twice', async () => {
+      await hue.get('groups/5');
+      await hue.get('groups/5');
+
+      await hue.get('lights/10');
+      await hue.get('lights/10');
+
+      expect(fetch).toHaveBeenCalledTimes(2);
     });
   });
 

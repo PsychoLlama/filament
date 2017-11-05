@@ -1,14 +1,16 @@
 import { graphql } from 'graphql';
 import nock from 'nock';
 
-import * as context from './context';
+import { createHueLoaders, huerl } from './context';
 import resolvers from './resolvers';
 import schema from './schema';
 
-export const bridge = nock(context.huerl());
+export const bridge = nock(huerl());
 
 export const query = async ([request]) => {
-  const response = await graphql(schema, request, resolvers, context);
+  const response = await graphql(schema, request, resolvers, {
+    hue: createHueLoaders(),
+  });
 
   expect(response.errors).toBeUndefined();
 

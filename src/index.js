@@ -3,7 +3,7 @@ import express from 'express';
 import schema from './schema';
 import rc from 'rc';
 
-import * as context from './context';
+import { createHueLoaders } from './context';
 import rootValue from './resolvers';
 
 const config = rc('filament', {
@@ -12,12 +12,12 @@ const config = rc('filament', {
   port: 8080,
 });
 
-const graphqlEndpoint = graphqlHttp({
+const graphqlEndpoint = graphqlHttp(() => ({
+  context: { hue: createHueLoaders() },
   graphiql: config.graphiql === true,
   rootValue,
-  context,
   schema,
-});
+}));
 
 const app = express();
 app.use(graphqlEndpoint);
