@@ -4,7 +4,7 @@ import schema from './schema';
 import rc from 'rc';
 
 import { createHueLoaders } from './context';
-import rootValue from './resolvers';
+import * as rootValue from './resolvers';
 
 const config = rc('filament', {
   host: '0.0.0.0',

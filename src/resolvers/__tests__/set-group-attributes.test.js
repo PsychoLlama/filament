@@ -20,9 +20,7 @@ describe('Group attributes mutation', () => {
 
   it('sets the group attributes', async () => {
     await query`mutation {
-      hue {
-        setGroupAttributes(id: 10 attributes: { name: "bar" }) { name }
-      }
+      setGroupAttributes(id: 10 attributes: { name: "bar" }) { name }
     }`;
 
     expect(spy).toHaveBeenCalled();
