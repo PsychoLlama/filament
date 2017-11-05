@@ -66,16 +66,17 @@ export const createGroup = (fields = {}) => ({
 });
 
 export const createScenes = (fields = {}) => ({
-  HtUI2PPXPcsEPUt: {
-    name: 'Fall Colors',
-    lights: ['41', '42'],
+  KseUksCEskA9Al2: {
     owner: 'kn82nNLskEnks208Nla32LnLkndaekuDNKnsnks8',
+    lastupdated: '2017-10-30T02:10:46',
+    appdata: { version: 1 },
+    lights: ['41', '42'],
+    name: 'Fall Colors',
     recycle: false,
     locked: false,
-    appdata: { version: 1, data: 'U1o81_r04_d99' },
     picture: '',
-    lastupdated: '2017-10-30T02:10:46',
     version: 2,
   },
+
   ...fields,
 });
