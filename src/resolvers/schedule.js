@@ -8,3 +8,9 @@ export class Schedule {
     Object.assign(this, schedule, { id, localTime: localtime });
   }
 }
+
+export default async (args, context) => {
+  const schedule = await context.hue.get(`schedules/${args.id}`);
+
+  return new Schedule(args.id, schedule);
+};

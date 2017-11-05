@@ -115,6 +115,7 @@ type Query {
   scene(id: ID!): Scene
   scenes: [Scene]
   schedules: [Schedule]
+  schedule(id: ID!): Schedule
 }
 
 input LightState {
