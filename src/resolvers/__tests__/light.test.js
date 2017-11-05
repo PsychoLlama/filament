@@ -10,10 +10,10 @@ describe('Light resolver', () => {
     endpoint = bridge.get('/lights/30').reply(200, light);
 
     const data = await query`{
-      hue { light(id: 30) { name } }
+      light(id: 30) { name }
     }`;
 
-    expect(data.hue.light).toEqual({ name: light.name });
+    expect(data.light).toEqual({ name: light.name });
   });
 
   it('formats the data correctly', async () => {
@@ -21,14 +21,12 @@ describe('Light resolver', () => {
     endpoint = bridge.get('/lights/35').reply(200, light);
 
     const data = await query`{
-      hue {
-        light(id: 35) {
-          name manufacturer version model type on reachable id uniqueId
-        }
+      light(id: 35) {
+        name manufacturer version model type on reachable id uniqueId
       }
     }`;
 
-    expect(data.hue.light).toEqual(
+    expect(data.light).toEqual(
       expect.objectContaining({
         manufacturer: light.manufacturername,
         reachable: light.state.reachable,
@@ -49,13 +47,11 @@ describe('Light resolver', () => {
 
       endpoint = bridge.get('/lights/25').reply(200, light);
 
-      const { hue } = await query`{
-        hue {
-          light(id: 25) { color }
-        }
+      const result = await query`{
+        light(id: 25) { color }
       }`;
 
-      expect(hue.light.color).toBe(BLACK);
+      expect(result.light.color).toBe(BLACK);
     });
 
     it('returns a hex code', async () => {
@@ -67,13 +63,11 @@ describe('Light resolver', () => {
 
       endpoint = bridge.get('/lights/25').reply(200, light);
 
-      const { hue } = await query`{
-        hue {
-          light(id: 25) { color }
-        }
+      const result = await query`{
+        light(id: 25) { color }
       }`;
 
-      expect(hue.light.color).toBe(toHexColorCode(light.state));
+      expect(result.light.color).toBe(toHexColorCode(light.state));
     });
 
     it('understands temperature colors', async () => {
@@ -84,13 +78,11 @@ describe('Light resolver', () => {
 
       endpoint = bridge.get('/lights/30').reply(200, light);
 
-      const { hue } = await query`{
-        hue {
-          light(id: 30) { color }
-        }
+      const result = await query`{
+        light(id: 30) { color }
       }`;
 
-      expect(hue.light.color).toBe(toHexColorCode(light.state));
+      expect(result.light.color).toBe(toHexColorCode(light.state));
     });
 
     it('understands XY colorspace', async () => {
@@ -100,13 +92,11 @@ describe('Light resolver', () => {
 
       endpoint = bridge.get('/lights/35').reply(200, light);
 
-      const { hue } = await query`{
-        hue {
-          light(id: 35) { color }
-        }
+      const result = await query`{
+        light(id: 35) { color }
       }`;
 
-      expect(hue.light.color).toBe(toHexColorCode(light.state));
+      expect(result.light.color).toBe(toHexColorCode(light.state));
     });
   });
 });

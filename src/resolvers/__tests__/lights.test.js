@@ -18,13 +18,11 @@ describe('Lights resolver', () => {
     const lights = createLights(2);
     endpoint = bridge.get('/lights').reply(200, lights);
 
-    const { hue } = await query`{
-      hue {
-        lights { name id }
-      }
+    const result = await query`{
+      lights { name id }
     }`;
 
-    expect(hue.lights).toEqual([
+    expect(result.lights).toEqual([
       {
         id: String(lights[1].id),
         name: lights[1].name,
@@ -40,12 +38,10 @@ describe('Lights resolver', () => {
     const lights = createLights(1);
     endpoint = bridge.get('/lights').reply(200, lights);
 
-    const { hue } = await query`{
-      hue {
-        lights { name id on color type uniqueId version model reachable }
-      }
+    const result = await query`{
+      lights { name id on color type uniqueId version model reachable }
     }`;
 
-    expect(hue.lights).toMatchSnapshot();
+    expect(result.lights).toMatchSnapshot();
   });
 });

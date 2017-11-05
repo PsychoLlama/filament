@@ -21,13 +21,11 @@ describe('Group state mutation', () => {
   });
 
   it('sets the group state', async () => {
-    const { hue } = await query`mutation {
-      hue {
-        group: setGroupState(id: 28 state: { on: true }) { allOn }
-      }
+    const result = await query`mutation {
+      group: setGroupState(id: 28 state: { on: true }) { allOn }
     }`;
 
-    expect(hue.group).toEqual({ allOn: group.state.all_on });
+    expect(result.group).toEqual({ allOn: group.state.all_on });
     expect(spy).toHaveBeenCalledWith(
       expect.any(String),
       JSON.stringify({
@@ -38,9 +36,7 @@ describe('Group state mutation', () => {
 
   it('sets the transition time', async () => {
     await query`mutation {
-      hue {
-        setGroupState(id: 28 state: { transition: 1000, on: true }) { anyOn }
-      }
+      setGroupState(id: 28 state: { transition: 1000, on: true }) { anyOn }
     }`;
 
     expect(spy).toHaveBeenCalled();
@@ -54,9 +50,7 @@ describe('Group state mutation', () => {
 
   it('supports color mutations', async () => {
     await query`mutation {
-      hue {
-        setGroupState(id: 28 state: { color: "#0000ff" }) { color }
-      }
+      setGroupState(id: 28 state: { color: "#0000ff" }) { color }
     }`;
 
     const [, json] = spy.mock.calls[0];

@@ -19,13 +19,11 @@ describe('Groups resolver', () => {
 
     endpoint = bridge.get('/groups').reply(200, groups);
 
-    const { hue } = await query`{
-      hue {
-        groups { name id }
-      }
+    const result = await query`{
+      groups { name id }
     }`;
 
-    expect(hue.groups).toEqual([
+    expect(result.groups).toEqual([
       {
         id: String(groups[1].id),
         name: groups[1].name,
@@ -41,12 +39,10 @@ describe('Groups resolver', () => {
     const groups = createGroups(1);
     endpoint = bridge.get('/groups').reply(200, groups);
 
-    const { hue } = await query`{
-      hue {
-        groups { color name anyOn type }
-      }
+    const result = await query`{
+      groups { color name anyOn type }
     }`;
 
-    expect(hue.groups).toMatchSnapshot();
+    expect(result.groups).toMatchSnapshot();
   });
 });

@@ -2,7 +2,7 @@ import { graphql } from 'graphql';
 import nock from 'nock';
 
 import { createHueLoaders, huerl } from './context';
-import resolvers from './resolvers';
+import * as resolvers from './resolvers';
 import schema from './schema';
 
 export const bridge = nock(huerl());

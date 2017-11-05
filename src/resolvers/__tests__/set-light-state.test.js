@@ -21,9 +21,7 @@ describe('Light state mutation', () => {
 
   it('sets the light state', async () => {
     await query`mutation {
-      hue {
-        setLightState(id: 10 state: { on: false }) { on }
-      }
+      setLightState(id: 10 state: { on: false }) { on }
     }`;
 
     expect(spy).toHaveBeenCalled();
@@ -34,9 +32,7 @@ describe('Light state mutation', () => {
 
   it('supports transition time', async () => {
     await query`mutation {
-      hue {
-        setLightState(id: 10 state: { transition: 2000, on: true }) { on }
-      }
+      setLightState(id: 10 state: { transition: 2000, on: true }) { on }
     }`;
 
     const [, json] = spy.mock.calls[0];
@@ -49,9 +45,7 @@ describe('Light state mutation', () => {
 
   it('supports colors', async () => {
     await query`mutation {
-      hue {
-        setLightState(id: 10 state: { on: true, color: "#00aaff" }) { on }
-      }
+      setLightState(id: 10 state: { on: true, color: "#00aaff" }) { on }
     }`;
 
     const [, json] = spy.mock.calls[0];

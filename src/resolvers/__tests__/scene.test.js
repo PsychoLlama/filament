@@ -13,15 +13,13 @@ describe('Scene resolver', () => {
   });
 
   it('works', async () => {
-    const { hue } = await query`{
-      hue {
-        scene(id: "KseUksCEskA9Al2") {
-          name id
-        }
+    const result = await query`{
+      scene(id: "KseUksCEskA9Al2") {
+        name id
       }
     }`;
 
-    expect(hue.scene).toEqual({
+    expect(result.scene).toEqual({
       id: 'KseUksCEskA9Al2',
       name: scene.name,
     });
@@ -34,14 +32,12 @@ describe('Scene resolver', () => {
     ];
 
     const result = await query`{
-      hue {
-        scene(id: "KseUksCEskA9Al2") {
-          lights { id name }
-        }
+      scene(id: "KseUksCEskA9Al2") {
+        lights { id name }
       }
     }`;
 
-    expect(result.hue.scene.lights).toEqual([
+    expect(result.scene.lights).toEqual([
       { id: '41', name: 'Light name' },
       { id: '42', name: 'Light name' },
     ]);

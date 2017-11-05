@@ -2,15 +2,13 @@
 
 exports[`Group resolver returns the correct data 1`] = `
 Object {
-  "hue": Object {
-    "group": Object {
-      "allOn": false,
-      "anyOn": true,
-      "class": "Hallway",
-      "id": "10",
-      "name": "Group name",
-      "type": "Room",
-    },
+  "group": Object {
+    "allOn": false,
+    "anyOn": true,
+    "class": "Hallway",
+    "id": "10",
+    "name": "Group name",
+    "type": "Room",
   },
 }
 `;

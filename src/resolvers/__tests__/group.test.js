@@ -13,13 +13,11 @@ describe('Group resolver', () => {
     endpoint = bridge.get('/groups/5').reply(200, group);
 
     const result = await query`{
-      hue { group(id: 5) { name } }
+      group(id: 5) { name }
     }`;
 
     expect(result).toEqual({
-      hue: {
-        group: { name: group.name },
-      },
+      group: { name: group.name },
     });
   });
 
@@ -28,10 +26,8 @@ describe('Group resolver', () => {
     endpoint = bridge.get('/groups/10').reply(200, group);
 
     const result = await query`{
-      hue {
-        group(id: 10) {
-          name type class anyOn allOn id
-        }
+      group(id: 10) {
+        name type class anyOn allOn id
       }
     }`;
 
@@ -45,14 +41,12 @@ describe('Group resolver', () => {
     const lightEndpoint = bridge.get('/lights/1').reply(200, light);
 
     const result = await query`{
-      hue {
-        group(id: 15) {
-          lights { name id }
-        }
+      group(id: 15) {
+        lights { name id }
       }
     }`;
 
-    expect(result.hue.group).toEqual({
+    expect(result.group).toEqual({
       lights: [{ name: light.name, id: '1' }],
     });
 
@@ -66,13 +60,11 @@ describe('Group resolver', () => {
 
       endpoint = bridge.get('/groups/25').reply(200, group);
 
-      const { hue } = await query`{
-        hue {
-          group(id: 25) { color }
-        }
+      const result = await query`{
+        group(id: 25) { color }
       }`;
 
-      expect(hue.group.color).toBe('#000000');
+      expect(result.group.color).toBe('#000000');
     });
 
     it('returns a hex code', async () => {
@@ -84,13 +76,11 @@ describe('Group resolver', () => {
 
       endpoint = bridge.get('/groups/25').reply(200, group);
 
-      const { hue } = await query`{
-        hue {
-          group(id: 25) { color }
-        }
+      const result = await query`{
+        group(id: 25) { color }
       }`;
 
-      expect(hue.group.color).toBe(toHexColorCode(group.action));
+      expect(result.group.color).toBe(toHexColorCode(group.action));
     });
 
     it('understands temperature colors', async () => {
@@ -101,13 +91,11 @@ describe('Group resolver', () => {
 
       endpoint = bridge.get('/groups/30').reply(200, group);
 
-      const { hue } = await query`{
-        hue {
-          group(id: 30) { color }
-        }
+      const result = await query`{
+        group(id: 30) { color }
       }`;
 
-      expect(hue.group.color).toBe(toHexColorCode(group.action));
+      expect(result.group.color).toBe(toHexColorCode(group.action));
     });
 
     it('understands XY colorspace', async () => {
@@ -117,13 +105,11 @@ describe('Group resolver', () => {
 
       endpoint = bridge.get('/groups/35').reply(200, group);
 
-      const { hue } = await query`{
-        hue {
-          group(id: 35) { color }
-        }
+      const result = await query`{
+        group(id: 35) { color }
       }`;
 
-      expect(hue.group.color).toBe(toHexColorCode(group.action));
+      expect(result.group.color).toBe(toHexColorCode(group.action));
     });
   });
 });

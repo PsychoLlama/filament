@@ -20,9 +20,7 @@ describe('Light attributes mutation', () => {
 
   it('sets the light attributes', async () => {
     await query`mutation {
-      hue {
-        setLightAttributes(id: 10 attributes: { name: "foo" }) { name }
-      }
+      setLightAttributes(id: 10 attributes: { name: "foo" }) { name }
     }`;
 
     expect(spy).toHaveBeenCalled();

@@ -79,18 +79,13 @@ type Scene {
   id: ID
 }
 
-# Queries for reading the state of hue lights.
-type Hue {
+type Query {
   group(id: ID!): LightGroup
   light(id: ID!): Light
   scene(id: ID!): Scene
   groups: [LightGroup]
   lights: [Light]
   scenes: [Scene]
-}
-
-type Query {
-  hue: Hue
 }
 
 input LightState {
@@ -109,13 +104,9 @@ input LightGroupAttributes {
   lights: [ID!]
 }
 
-type HueMutations {
+type Mutation {
   setGroupState(id: ID!, state: LightState!): LightGroup
   setLightState(id: ID!, state: LightState!): Light
   setLightAttributes(id: ID!, attributes: LightAttributes!): Light
   setGroupAttributes(id: ID!, attributes: LightGroupAttributes!): LightGroup
-}
-
-type Mutation {
-  hue: HueMutations
 }
