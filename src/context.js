@@ -1,3 +1,4 @@
+import Dataloader from 'dataloader';
 import invariant from 'invariant';
 import fetch from 'node-fetch';
 
@@ -45,56 +46,65 @@ const checkResultsForErrors = results => {
   return results;
 };
 
-export const hue = {
-  /**
-   * GET request to hue.
-   * @param  {String} [path] - Relative URL path.
-   * @return {Promise<Object>} - HTTP response.
-   */
-  get: async path => {
-    const url = huerl(path);
-
-    const response = await fetch(url);
-    const json = await response.json();
-
-    return checkResultsForErrors(json);
-  },
-
-  /**
-   * PUT request to hue.
-   * @param  {String} [path] - Relative URL path.
-   * @param  {Object} patch - JSON data.
-   * @return {Promise<Object>} - HTTP response.
-   */
-  put: async (path, patch) => {
-    const url = huerl(path);
-
-    const response = await fetch(url, {
-      body: JSON.stringify(patch),
-      method: 'PUT',
+export const createHueLoaders = () => {
+  const loader = new Dataloader(urls => {
+    const requests = urls.map(async url => {
+      const response = await fetch(url);
+      return response.json();
     });
 
-    const json = await response.json();
+    return Promise.all(requests);
+  });
 
-    return checkResultsForErrors(json);
-  },
+  return {
+    /**
+     * GET request to hue.
+     * @param  {String} [path] - Relative URL path.
+     * @return {Promise<Object>} - HTTP response.
+     */
+    get: async path => {
+      const url = huerl(path);
+      const json = await loader.load(url);
 
-  /**
-   * POST request to hue.
-   * @param  {String} [path] - Relative URL path.
-   * @param  {Object} data - JSON data.
-   * @return {Promise<Object>} - HTTP response.
-   */
-  post: async (path, data) => {
-    const url = huerl(path);
+      return checkResultsForErrors(json);
+    },
 
-    const response = await fetch(url, {
-      body: JSON.stringify(data),
-      method: 'POST',
-    });
+    /**
+     * PUT request to hue.
+     * @param  {String} [path] - Relative URL path.
+     * @param  {Object} patch - JSON data.
+     * @return {Promise<Object>} - HTTP response.
+     */
+    put: async (path, patch) => {
+      const url = huerl(path);
 
-    const json = await response.json();
+      const response = await fetch(url, {
+        body: JSON.stringify(patch),
+        method: 'PUT',
+      });
 
-    return checkResultsForErrors(json);
-  },
+      const json = await response.json();
+
+      return checkResultsForErrors(json);
+    },
+
+    /**
+     * POST request to hue.
+     * @param  {String} [path] - Relative URL path.
+     * @param  {Object} data - JSON data.
+     * @return {Promise<Object>} - HTTP response.
+     */
+    post: async (path, data) => {
+      const url = huerl(path);
+
+      const response = await fetch(url, {
+        body: JSON.stringify(data),
+        method: 'POST',
+      });
+
+      const json = await response.json();
+
+      return checkResultsForErrors(json);
+    },
+  };
 };
