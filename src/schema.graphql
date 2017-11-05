@@ -79,12 +79,24 @@ type Scene {
   id: ID
 }
 
+enum HttpMethod {
+  DELETE
+  POST
+  PUT
+}
+
+type ScheduleCommand {
+  method: HttpMethod
+  address: String
+}
+
 enum ScheduleStatus {
   enabled
   disabled
 }
 
 type Schedule {
+  command: ScheduleCommand
   status: ScheduleStatus
   description: String
   localTime: String
