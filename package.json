@@ -17,7 +17,7 @@
     "start:watch": "nodemon . -e js,graphql",
     "register": "hue-register filament > bridge.json",
     "precommit": "lint-staged",
-    "prettier": "prettier --single-quote --trailing-comma all"
+    "prettier": "prettier"
   },
   "lint-staged": {
     "*.js": [

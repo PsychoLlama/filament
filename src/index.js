@@ -20,6 +20,8 @@ const graphqlEndpoint = graphqlHttp(() => ({
 }));
 
 const app = express();
+
+app.get('/status', (req, res) => res.status(200).end('Online'));
 app.use(graphqlEndpoint);
 
 app.listen(config.port, config.host);
