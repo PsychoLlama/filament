@@ -1,5 +1,5 @@
 {
-  "name": "hue-filament",
+  "name": "filament",
   "main": "dist/index.js",
   "description": "GraphQL for Philips Hue",
   "version": "0.1.0",
