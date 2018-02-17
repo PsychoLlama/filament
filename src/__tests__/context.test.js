@@ -74,6 +74,12 @@ describe('Hue http', () => {
 
       expect(spy).toHaveBeenCalledWith(expect.any(HueError));
     });
+
+    it('increments the request count', async () => {
+      expect(hue.getRequestStats()).toMatchObject({ requestCount: 0 });
+      await hue.put('lights/1', { name: 'McLight' });
+      expect(hue.getRequestStats()).toMatchObject({ requestCount: 1 });
+    });
   });
 
   describe('get()', () => {
@@ -147,6 +153,22 @@ describe('Hue http', () => {
 
       expect(fetch).toHaveBeenCalledTimes(2);
     });
+
+    it('increments the request count', async () => {
+      expect(hue.getRequestStats()).toMatchObject({ requestCount: 0 });
+      await hue.get('schedules/10');
+      expect(hue.getRequestStats()).toMatchObject({ requestCount: 1 });
+    });
+
+    it('only counts cached requests the first time', async () => {
+      expect(hue.getRequestStats()).toMatchObject({ requestCount: 0 });
+
+      await hue.get('schedules/10');
+      await hue.get('schedules/10');
+      await hue.get('schedules/10');
+
+      expect(hue.getRequestStats()).toMatchObject({ requestCount: 1 });
+    });
   });
 
   describe('post()', () => {
@@ -176,6 +198,44 @@ describe('Hue http', () => {
       await hue.post('lights', { id: 'cool-beans' }).catch(spy);
 
       expect(spy).toHaveBeenCalledWith(expect.any(HueError));
+    });
+
+    it('increments the request count', async () => {
+      expect(hue.getRequestStats()).toMatchObject({ requestCount: 0 });
+      await hue.post('lights', { id: 'no' });
+      expect(hue.getRequestStats()).toMatchObject({ requestCount: 1 });
+    });
+  });
+
+  describe('metrics', () => {
+    it('clones the stats object', () => {
+      const stats = hue.getRequestStats();
+      stats.requestPerformance.post = null;
+      stats.requestPerformance.get = null;
+      stats.requestPerformance.put = null;
+      stats.requestCount += 10;
+
+      expect(hue.getRequestStats()).toEqual({
+        requestCount: 0,
+        requestPerformance: {
+          post: {},
+          put: {},
+          get: {},
+        },
+      });
+    });
+
+    it('includes request timing', async () => {
+      await hue.get('lights/5');
+      await hue.put('lights/10', { name: 'Updated' });
+      await hue.post('lights', { name: 'Updated' });
+
+      const stats = hue.getRequestStats();
+      expect(stats.requestPerformance).toEqual({
+        put: { 'lights/10': expect.any(Number) },
+        get: { 'lights/5': expect.any(Number) },
+        post: { lights: expect.any(Number) },
+      });
     });
   });
 });
