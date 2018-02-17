@@ -55,12 +55,7 @@ const stopwatch = () => {
 
 export const createHueLoaders = () => {
   const stats = {
-    requestCount: 0,
-    requestPerformance: {
-      post: {},
-      get: {},
-      put: {},
-    },
+    requests: [],
   };
 
   const loader = new Dataloader(urls => {
@@ -70,8 +65,11 @@ export const createHueLoaders = () => {
       const time = stopwatch();
       const response = await fetch(url);
 
-      stats.requestPerformance.get[path] = time();
-      stats.requestCount += 1;
+      stats.requests.push({
+        elapsed: time(),
+        endpoint: path,
+        method: 'GET',
+      });
 
       return response.json();
     });
@@ -108,8 +106,11 @@ export const createHueLoaders = () => {
 
       const json = await response.json();
 
-      stats.requestPerformance.put[path] = time();
-      stats.requestCount += 1;
+      stats.requests.push({
+        elapsed: time(),
+        endpoint: path,
+        method: 'PUT',
+      });
 
       return checkResultsForErrors(json);
     },
@@ -132,8 +133,11 @@ export const createHueLoaders = () => {
 
       const json = await response.json();
 
-      stats.requestPerformance.post[path] = time();
-      stats.requestCount += 1;
+      stats.requests.push({
+        elapsed: time(),
+        endpoint: path,
+        method: 'POST',
+      });
 
       return checkResultsForErrors(json);
     },

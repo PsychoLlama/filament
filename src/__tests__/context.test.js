@@ -74,12 +74,6 @@ describe('Hue http', () => {
 
       expect(spy).toHaveBeenCalledWith(expect.any(HueError));
     });
-
-    it('increments the request count', async () => {
-      expect(hue.getRequestStats()).toMatchObject({ requestCount: 0 });
-      await hue.put('lights/1', { name: 'McLight' });
-      expect(hue.getRequestStats()).toMatchObject({ requestCount: 1 });
-    });
   });
 
   describe('get()', () => {
@@ -154,20 +148,14 @@ describe('Hue http', () => {
       expect(fetch).toHaveBeenCalledTimes(2);
     });
 
-    it('increments the request count', async () => {
-      expect(hue.getRequestStats()).toMatchObject({ requestCount: 0 });
-      await hue.get('schedules/10');
-      expect(hue.getRequestStats()).toMatchObject({ requestCount: 1 });
-    });
-
     it('only counts cached requests the first time', async () => {
-      expect(hue.getRequestStats()).toMatchObject({ requestCount: 0 });
+      expect(hue.getRequestStats().requests).toHaveLength(0);
 
       await hue.get('schedules/10');
       await hue.get('schedules/10');
       await hue.get('schedules/10');
 
-      expect(hue.getRequestStats()).toMatchObject({ requestCount: 1 });
+      expect(hue.getRequestStats().requests).toHaveLength(1);
     });
   });
 
@@ -199,43 +187,29 @@ describe('Hue http', () => {
 
       expect(spy).toHaveBeenCalledWith(expect.any(HueError));
     });
-
-    it('increments the request count', async () => {
-      expect(hue.getRequestStats()).toMatchObject({ requestCount: 0 });
-      await hue.post('lights', { id: 'no' });
-      expect(hue.getRequestStats()).toMatchObject({ requestCount: 1 });
-    });
   });
 
   describe('metrics', () => {
     it('clones the stats object', () => {
       const stats = hue.getRequestStats();
-      stats.requestPerformance.post = null;
-      stats.requestPerformance.get = null;
-      stats.requestPerformance.put = null;
-      stats.requestCount += 10;
+      stats.requests = null;
 
       expect(hue.getRequestStats()).toEqual({
-        requestCount: 0,
-        requestPerformance: {
-          post: {},
-          put: {},
-          get: {},
-        },
+        requests: [],
       });
     });
 
     it('includes request timing', async () => {
-      await hue.get('lights/5');
+      await hue.post('lights/no', { jk: 'no such endpoint' });
       await hue.put('lights/10', { name: 'Updated' });
-      await hue.post('lights', { name: 'Updated' });
+      await hue.get('lights/5');
 
       const stats = hue.getRequestStats();
-      expect(stats.requestPerformance).toEqual({
-        put: { 'lights/10': expect.any(Number) },
-        get: { 'lights/5': expect.any(Number) },
-        post: { lights: expect.any(Number) },
-      });
+      expect(stats.requests).toEqual([
+        { method: 'POST', endpoint: 'lights/no', elapsed: expect.any(Number) },
+        { method: 'PUT', endpoint: 'lights/10', elapsed: expect.any(Number) },
+        { method: 'GET', endpoint: 'lights/5', elapsed: expect.any(Number) },
+      ]);
     });
   });
 });

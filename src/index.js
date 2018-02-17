@@ -27,8 +27,7 @@ const graphqlEndpoint = graphqlHttp(() => {
       return {
         performance: {
           elapsed: Date.now() - requestStartTime,
-          timing: stats.requestPerformance,
-          requests: stats.requestCount,
+          requests: stats.requests,
         },
       };
     },
