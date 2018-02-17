@@ -13,12 +13,27 @@ const config = rc('filament', {
   port: 8080,
 });
 
-const graphqlEndpoint = graphqlHttp(() => ({
-  context: { hue: createHueLoaders() },
-  graphiql: config.graphiql === true,
-  rootValue,
-  schema,
-}));
+const graphqlEndpoint = graphqlHttp(() => {
+  const requestStartTime = Date.now();
+  const hue = createHueLoaders();
+
+  return {
+    context: { hue },
+    graphiql: config.graphiql === true,
+    rootValue,
+    schema,
+    extensions: () => {
+      const stats = hue.getRequestStats();
+
+      return {
+        performance: {
+          elapsed: Date.now() - requestStartTime,
+          requests: stats.requests,
+        },
+      };
+    },
+  };
+});
 
 const app = express();
 

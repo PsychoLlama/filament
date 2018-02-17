@@ -147,6 +147,16 @@ describe('Hue http', () => {
 
       expect(fetch).toHaveBeenCalledTimes(2);
     });
+
+    it('only counts cached requests the first time', async () => {
+      expect(hue.getRequestStats().requests).toHaveLength(0);
+
+      await hue.get('schedules/10');
+      await hue.get('schedules/10');
+      await hue.get('schedules/10');
+
+      expect(hue.getRequestStats().requests).toHaveLength(1);
+    });
   });
 
   describe('post()', () => {
@@ -176,6 +186,30 @@ describe('Hue http', () => {
       await hue.post('lights', { id: 'cool-beans' }).catch(spy);
 
       expect(spy).toHaveBeenCalledWith(expect.any(HueError));
+    });
+  });
+
+  describe('metrics', () => {
+    it('clones the stats object', () => {
+      const stats = hue.getRequestStats();
+      stats.requests = null;
+
+      expect(hue.getRequestStats()).toEqual({
+        requests: [],
+      });
+    });
+
+    it('includes request timing', async () => {
+      await hue.post('lights/no', { jk: 'no such endpoint' });
+      await hue.put('lights/10', { name: 'Updated' });
+      await hue.get('lights/5');
+
+      const stats = hue.getRequestStats();
+      expect(stats.requests).toEqual([
+        { method: 'POST', endpoint: 'lights/no', elapsed: expect.any(Number) },
+        { method: 'PUT', endpoint: 'lights/10', elapsed: expect.any(Number) },
+        { method: 'GET', endpoint: 'lights/5', elapsed: expect.any(Number) },
+      ]);
     });
   });
 });

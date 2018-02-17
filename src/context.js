@@ -1,6 +1,7 @@
 import Dataloader from 'dataloader';
 import invariant from 'invariant';
 import fetch from 'node-fetch';
+import clone from 'clone';
 
 import bridge from '../bridge.json';
 
@@ -46,10 +47,30 @@ const checkResultsForErrors = results => {
   return results;
 };
 
+const stopwatch = () => {
+  const start = Date.now();
+
+  return () => Date.now() - start;
+};
+
 export const createHueLoaders = () => {
+  const stats = {
+    requests: [],
+  };
+
   const loader = new Dataloader(urls => {
-    const requests = urls.map(async url => {
+    const requests = urls.map(async path => {
+      const url = huerl(path);
+
+      const time = stopwatch();
       const response = await fetch(url);
+
+      stats.requests.push({
+        elapsed: time(),
+        endpoint: path,
+        method: 'GET',
+      });
+
       return response.json();
     });
 
@@ -59,11 +80,10 @@ export const createHueLoaders = () => {
   return {
     /**
      * GET request to hue.
-     * @param  {String} [path] - Relative URL path.
+     * @param  {String} [url] - Relative URL path.
      * @return {Promise<Object>} - HTTP response.
      */
-    get: async path => {
-      const url = huerl(path);
+    get: async url => {
       const json = await loader.load(url);
 
       return checkResultsForErrors(json);
@@ -78,12 +98,19 @@ export const createHueLoaders = () => {
     put: async (path, patch) => {
       const url = huerl(path);
 
+      const time = stopwatch();
       const response = await fetch(url, {
         body: JSON.stringify(patch),
         method: 'PUT',
       });
 
       const json = await response.json();
+
+      stats.requests.push({
+        elapsed: time(),
+        endpoint: path,
+        method: 'PUT',
+      });
 
       return checkResultsForErrors(json);
     },
@@ -97,6 +124,8 @@ export const createHueLoaders = () => {
     post: async (path, data) => {
       const url = huerl(path);
 
+      const time = stopwatch();
+
       const response = await fetch(url, {
         body: JSON.stringify(data),
         method: 'POST',
@@ -104,7 +133,20 @@ export const createHueLoaders = () => {
 
       const json = await response.json();
 
+      stats.requests.push({
+        elapsed: time(),
+        endpoint: path,
+        method: 'POST',
+      });
+
       return checkResultsForErrors(json);
     },
+
+    /**
+     * Getter for performance-related metrics. Deep cloned
+     * because I have no trust.
+     * @return {Object} - Request counts, timing, etc.
+     */
+    getRequestStats: () => clone(stats),
   };
 };
