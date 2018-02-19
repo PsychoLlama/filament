@@ -13,6 +13,7 @@ services:
     depends_on:
       - db
     environment:
+      - filament_sentryKey=${filament_sentryKey}
       - filament_port=80
       - NODE_ENV=production
       - PGHOST=db

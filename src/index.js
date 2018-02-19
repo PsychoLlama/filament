@@ -1,5 +1,6 @@
 import graphqlHttp from 'express-graphql';
 import express from 'express';
+import Raven from 'raven';
 import rc from 'rc';
 
 import { createHueLoaders } from './context';
@@ -8,6 +9,7 @@ import schema from './schema';
 import pkg from '../package';
 
 const config = rc('filament', {
+  sentryKey: null,
   host: '0.0.0.0',
   graphiql: true,
   port: 8080,
@@ -45,3 +47,8 @@ app.get('/status', (req, res) => {
 app.use(graphqlEndpoint);
 
 app.listen(config.port, config.host);
+
+// Sentry reporting (optional).
+if (config.sentryKey) {
+  Raven.config(config.sentryKey).install();
+}
