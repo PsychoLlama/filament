@@ -1,3 +1,4 @@
+import { prefetchLights } from '../utils/prefetch';
 import resolveLight from './light';
 
 /** Represents a Hue scene */
@@ -19,7 +20,9 @@ export class Scene {
    * @param  {Object} info - GraphQL AST request info.
    * @return {Promise[]} - The request for each light.
    */
-  lights(args, context, info) {
+  async lights(args, context, info) {
+    await prefetchLights(context);
+
     return this._lights.map(id => resolveLight({ id }, context, info));
   }
 }
