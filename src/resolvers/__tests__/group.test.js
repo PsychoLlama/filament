@@ -38,7 +38,7 @@ describe('Group resolver', () => {
     const group = createGroup({ lights: [1] });
     const light = createLight();
     endpoint = bridge.get('/groups/15').reply(200, group);
-    const lightEndpoint = bridge.get('/lights/1').reply(200, light);
+    const lightEndpoint = bridge.get('/lights').reply(200, { 1: light });
 
     const result = await query`{
       group(id: 15) {

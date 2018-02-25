@@ -212,4 +212,13 @@ describe('Hue http', () => {
       ]);
     });
   });
+
+  describe('precache', () => {
+    it('uses cache for later requests to the same url', async () => {
+      const response = { cached: 'response' };
+      hue.precache('lights/', response);
+
+      await expect(hue.get('lights/')).resolves.toEqual(response);
+    });
+  });
 });
