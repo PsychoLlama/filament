@@ -1,5 +1,6 @@
 /* eslint-disable require-jsdoc */
 import toHexColorCode, { BLACK } from '../utils/color';
+import { prefetchLights } from '../utils/prefetch';
 import resolveLight from './light';
 
 export class LightGroup {
@@ -20,6 +21,7 @@ export class LightGroup {
   }
 
   async lights(args, context) {
+    await prefetchLights(context);
     const requests = this.raw.lights.map(id => resolveLight({ id }, context));
 
     return Promise.all(requests);

@@ -148,5 +148,18 @@ export const createHueLoaders = () => {
      * @return {Object} - Request counts, timing, etc.
      */
     getRequestStats: () => clone(stats),
+
+    /**
+     * Primes the dataloader cache.
+     * @param  {String} url - A url to precache.
+     * @param  {any} response - Response data to use (typically json).
+     * @return {void}
+     * @example
+     * lights.forEach(light =>
+     *   context.precache(`lights/${light.id}`, light))
+     */
+    precache: (url, response) => {
+      loader.prime(url, response);
+    },
   };
 };

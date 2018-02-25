@@ -26,10 +26,10 @@ describe('Scene resolver', () => {
   });
 
   it('resolves light data when requested', async () => {
-    const endpoints = [
-      bridge.get('/lights/41').reply(200, createLight()),
-      bridge.get('/lights/42').reply(200, createLight()),
-    ];
+    const endpoint = bridge.get('/lights').reply(200, {
+      41: createLight(),
+      42: createLight(),
+    });
 
     const result = await query`{
       scene(id: "KseUksCEskA9Al2") {
@@ -42,6 +42,6 @@ describe('Scene resolver', () => {
       { id: '42', name: 'Light name' },
     ]);
 
-    endpoints.forEach(endpoint => endpoint.done());
+    endpoint.done();
   });
 });
