@@ -5,7 +5,12 @@ export class Schedule {
    * @param  {Object} schedule - Data returned from the REST API.
    */
   constructor(id, { localtime, ...schedule }) {
-    Object.assign(this, schedule, { id, localTime: localtime });
+    const command = {
+      ...schedule.command,
+      body: JSON.stringify(schedule.command.body),
+    };
+
+    Object.assign(this, schedule, { localTime: localtime, command, id });
   }
 }
 

@@ -88,6 +88,8 @@ enum HttpMethod {
 type ScheduleCommand {
   method: HttpMethod
   address: String
+  # The JSON-stringified request body.
+  body: String
 }
 
 enum ScheduleStatus {

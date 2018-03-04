@@ -32,4 +32,18 @@ describe('Schedule resolver', () => {
       id: '8',
     });
   });
+
+  // GraphQL doesn't do well with unstructured data.
+  it('stringifies the command body', async () => {
+    const result = await query`{
+      schedule(id: "8") {
+        command {
+          body
+        }
+      }
+    }`;
+
+    const expected = JSON.stringify(schedule.command.body);
+    expect(result.schedule.command.body).toEqual(expected);
+  });
 });
