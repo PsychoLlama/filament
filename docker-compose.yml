@@ -1,17 +1,9 @@
 version: '3'
 
 services:
-  db:
-    restart: unless-stopped
-    image: postgres
-    environment:
-      - PGPORT=5432
-
   filament:
     restart: unless-stopped
     build: .
-    depends_on:
-      - db
     environment:
       - filament_sentryKey=${filament_sentryKey}
       - filament_port=80
@@ -20,5 +12,3 @@ services:
       - PGPORT=5432
     ports:
       - "80:80"
-    links:
-      - db
