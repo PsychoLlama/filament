@@ -14,6 +14,7 @@
     "build": "babel --copy-files src/ -d dist/ --ignore __mocks__,__tests__",
     "build:watch": "npm run build -- --watch",
     "start": "pm2 start --no-daemon .",
+    "start:prod": "NODE_ENV=production yarn -s start",
     "start:watch": "nodemon . -e js,graphql",
     "register": "hue-register filament > bridge.json",
     "precommit": "lint-staged",

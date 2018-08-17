@@ -7,8 +7,5 @@ services:
     environment:
       - filament_sentryKey=${filament_sentryKey}
       - filament_port=80
-      - NODE_ENV=production
-      - PGHOST=db
-      - PGPORT=5432
     ports:
       - "80:80"
