@@ -16,7 +16,6 @@
     "start": "pm2 start --no-daemon .",
     "start:watch": "nodemon . -e js,graphql",
     "register": "hue-register filament > bridge.json",
-    "precommit": "lint-staged",
     "prettier": "prettier"
   },
   "lint-staged": {
@@ -28,6 +27,11 @@
       "npm run prettier -- --write",
       "git add"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "precommit": "lint-staged"
+    }
   },
   "dependencies": {
     "change-case": "^3.0.1",
@@ -54,9 +58,9 @@
     "eslint": "^4.4.1",
     "eslint-config-llama": "^3.0.0",
     "eslint-config-prettier": "^2.3.0",
-    "husky": "^0.14.3",
+    "husky": "^2.4.1",
     "jest": "^22.3.0",
-    "lint-staged": "^6.1.1",
+    "lint-staged": "^8.2.1",
     "nock": "^9.0.14",
     "nodemon": "^1.11.0",
     "prettier": "^1.5.3"
