@@ -1,4 +1,8 @@
 {
-  "presets": ["es2015-node"],
-  "plugins": ["transform-object-rest-spread", "transform-async-to-generator"]
+  "presets": [
+    "@babel/preset-env"
+  ],
+  "plugins": [
+    "@babel/plugin-proposal-object-rest-spread"
+  ]
 }

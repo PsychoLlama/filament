@@ -49,12 +49,21 @@
     "rc": "^1.2.1",
     "tinycolor2": "^1.4.1"
   },
+  "browserslist": [
+    "maintained node versions"
+  ],
+  "engines": {
+    "node": ">=8"
+  },
   "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-eslint": "^8.0.1",
-    "babel-plugin-transform-async-to-generator": "^6.24.1",
-    "babel-plugin-transform-object-rest-spread": "^6.23.0",
-    "babel-preset-es2015-node": "^6.1.1",
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/plugin-transform-async-to-generator": "^7.0.0",
+    "@babel/preset-env": "^7.4.5",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-eslint": "^9.0.0",
+    "babel-jest": "^23.4.2",
     "eslint": "^4.4.1",
     "eslint-config-llama": "^3.0.0",
     "eslint-config-prettier": "^2.3.0",
