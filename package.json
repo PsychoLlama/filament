@@ -72,7 +72,7 @@
     "jest": "^24.9.0",
     "lint-staged": "^9.4.1",
     "nock": "^11.3.5",
-    "nodemon": "^1.19.2",
+    "nodemon": "^1.19.3",
     "prettier": "^1.18.2"
   },
   "jest": {
