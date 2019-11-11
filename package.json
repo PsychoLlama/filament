@@ -73,7 +73,7 @@
     "lint-staged": "^9.4.2",
     "nock": "^11.7.0",
     "nodemon": "^1.19.4",
-    "prettier": "^1.18.2"
+    "prettier": "^1.19.1"
   },
   "jest": {
     "testPathIgnorePatterns": [
