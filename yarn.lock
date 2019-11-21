@@ -3359,10 +3359,10 @@ hue-bridge-discovery@^1.1.2:
     node-ssdp "^2.7.0"
     uclass "^2.0.7"
 
-hue-colors@^0.5.2:
-  version "0.5.2"
-  resolved "https://registry.yarnpkg.com/hue-colors/-/hue-colors-0.5.2.tgz#91a05398bc8dae57572b8938c13292b95259f231"
-  integrity sha512-3wDLYgXnjAtGzcWP+VTlnxVbh7Vc4RC56ubOS9X0Skv55sjhUtrG6fF7WKDezXPAdmprR5MbQK0fPSjezMA9iQ==
+hue-colors@^0.5.3:
+  version "0.5.3"
+  resolved "https://registry.yarnpkg.com/hue-colors/-/hue-colors-0.5.3.tgz#4212d6aef9362d173d44d88909726b380d5acf8b"
+  integrity sha512-8Fh+qbaHUuEep/tGDvxu2CnE0SyblMQRD67mKNkuageY+8caYp0UA8BP6CwnVM66hS+aWKluUdQvBQvvyLjRdA==
 
 hue-connect@^0.3.0:
   version "0.3.0"
