@@ -65,7 +65,7 @@
     "@babel/plugin-transform-runtime": "^7.7.4",
     "@babel/preset-env": "^7.7.4",
     "babel-eslint": "^10.0.3",
-    "eslint": "^6.7.1",
+    "eslint": "^6.7.2",
     "eslint-config-llama": "^3.0.0",
     "eslint-config-prettier": "^6.7.0",
     "husky": "^3.1.0",
