@@ -2,7 +2,7 @@ import { query, bridge, createLight } from '../../test-utils';
 
 describe('Lights resolver', () => {
   let endpoint;
-  const createLights = amount =>
+  const createLights = (amount) =>
     Array(amount)
       .fill()
       .map((stopThisMadness, id) => createLight({ id: id + 1 }))

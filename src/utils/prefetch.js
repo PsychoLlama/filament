@@ -4,7 +4,7 @@
  * @param  {Object} context - The GQL context.
  * @return {Promise<void>} - Resolves when finished.
  */
-export const prefetchLights = async context => {
+export const prefetchLights = async (context) => {
   const lights = await context.hue.get('lights');
 
   for (const [id, light] of Object.entries(lights)) {

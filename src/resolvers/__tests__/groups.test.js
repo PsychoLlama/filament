@@ -4,7 +4,7 @@ describe('Groups resolver', () => {
   let endpoint;
   afterEach(() => endpoint.done());
 
-  const createGroups = amount =>
+  const createGroups = (amount) =>
     Array(amount)
       .fill()
       .map((goAwayUndefined, id) => createGroup({ id: id + 1 }))

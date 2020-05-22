@@ -50,7 +50,7 @@ export const colorExtractors = {
  * @param  {Number} state.bri - Brightness.
  * @return {String} - CSS hex color code, hash character and all.
  */
-export default state => {
+export default (state) => {
   // Default to HSB just in case Philips adds another color mode.
   const extractor =
     colorExtractors[state.colormode] || colorExtractors[colorTypes.HSB];

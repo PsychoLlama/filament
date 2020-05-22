@@ -33,12 +33,12 @@ export class HueError extends Error {
   }
 }
 
-const checkResultsForErrors = results => {
+const checkResultsForErrors = (results) => {
   if (!Array.isArray(results)) {
     return results;
   }
 
-  results.forEach(result => {
+  results.forEach((result) => {
     if (result && result.error) {
       throw new HueError(result.error);
     }
@@ -58,8 +58,8 @@ export const createHueLoaders = () => {
     requests: [],
   };
 
-  const loader = new Dataloader(urls => {
-    const requests = urls.map(async path => {
+  const loader = new Dataloader((urls) => {
+    const requests = urls.map(async (path) => {
       const url = huerl(path);
 
       const time = stopwatch();
@@ -83,7 +83,7 @@ export const createHueLoaders = () => {
      * @param  {String} [url] - Relative URL path.
      * @return {Promise<Object>} - HTTP response.
      */
-    get: async url => {
+    get: async (url) => {
       const json = await loader.load(url);
 
       return checkResultsForErrors(json);

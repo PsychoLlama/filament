@@ -4,13 +4,13 @@ import assert from 'assert';
 
 // Sometimes results in negative numbers,
 // and not always less than 0xffff.
-const normalizeHue = hue => {
+const normalizeHue = (hue) => {
   const sum = hue < 0 ? 0xffff + hue : hue;
 
   return sum % 0xffff;
 };
 
-export default mutation => {
+export default (mutation) => {
   const { transition, color, ...patch } = mutation;
 
   // Transitions are multiples of 100ms.

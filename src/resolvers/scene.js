@@ -23,7 +23,7 @@ export class Scene {
   async lights(args, context, info) {
     await prefetchLights(context);
 
-    return this._lights.map(id => resolveLight({ id }, context, info));
+    return this._lights.map((id) => resolveLight({ id }, context, info));
   }
 }
 

@@ -67,7 +67,7 @@ export const createGroup = (fields = {}) => ({
   ...fields,
 });
 
-export const createScene = fields => ({
+export const createScene = (fields) => ({
   owner: 'kn82nNLskEnks208Nla32LnLkndaekuDNKnsnks8',
   lastupdated: '2017-10-30T02:10:46',
   appdata: { version: 1 },
@@ -81,14 +81,14 @@ export const createScene = fields => ({
   ...fields,
 });
 
-export const createScenes = fields => ({
+export const createScenes = (fields) => ({
   KseUksCEskA9Al2: createScene(),
   skeCskess872Ck4: createScene(),
 
   ...fields,
 });
 
-export const createSchedule = fields => ({
+export const createSchedule = (fields) => ({
   created: '2017-10-31T13:45:56',
   localtime: 'W124/T07:45:00',
   description: 'MyRoutine',
@@ -105,7 +105,7 @@ export const createSchedule = fields => ({
   ...fields,
 });
 
-export const createSchedules = fields => ({
+export const createSchedules = (fields) => ({
   1: createSchedule(),
   2: createSchedule(),
 

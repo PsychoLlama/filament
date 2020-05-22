@@ -22,7 +22,7 @@ export class LightGroup {
 
   async lights(args, context) {
     await prefetchLights(context);
-    const requests = this.raw.lights.map(id => resolveLight({ id }, context));
+    const requests = this.raw.lights.map((id) => resolveLight({ id }, context));
 
     return Promise.all(requests);
   }

@@ -2,7 +2,7 @@ import assert from 'assert';
 import { validRooms } from './room';
 import { sentenceCase } from 'change-case';
 
-export default mutation => {
+export default (mutation) => {
   const { name, class: _class, lights, ...patch } = mutation;
 
   if (typeof name === 'string') {
@@ -21,7 +21,7 @@ export default mutation => {
 
   if (Array.isArray(lights)) {
     assert(
-      lights.every(lightId => lightId !== ''),
+      lights.every((lightId) => lightId !== ''),
       'Lights list contains empty string',
     );
 

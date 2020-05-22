@@ -28,7 +28,7 @@ describe('Schedules resolver', () => {
       }
     }`;
 
-    const expected = Object.keys(schedules).map(id =>
+    const expected = Object.keys(schedules).map((id) =>
       expect.objectContaining({ id }),
     );
 
