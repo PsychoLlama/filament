@@ -1,0 +1,25 @@
+name: Continuous Integration
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node_version: [10, 12, 14]
+    name: Node ${{ matrix.node_version }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        name: Install node v${{ matrix.node_version }}
+        with:
+          node-version: ${{ matrix.node_version }}
+      - name: Install libraries
+        run: yarn install --color
+      - name: Create mocks
+        run: echo '{}' > bridge.json
+      - name: Run tests
+        run: yarn -s test
