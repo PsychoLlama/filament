@@ -4,6 +4,7 @@ enum LightGroupType {
   LightGroup
   Luminaire
   Room
+  Zone
 }
 
 # The room class of a Room light group.
