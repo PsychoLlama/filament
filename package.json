@@ -33,7 +33,7 @@
     }
   },
   "dependencies": {
-    "@babel/runtime": "^7.10.2",
+    "@babel/runtime": "^7.10.3",
     "change-case": "^4.1.1",
     "clone": "^2.1.2",
     "dataloader": "^2.0.0",
