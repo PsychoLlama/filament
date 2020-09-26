@@ -47,7 +47,7 @@
     "pm2": "^4.4.1",
     "raven": "^2.6.4",
     "rc": "^1.2.8",
-    "tinycolor2": "^1.4.1"
+    "tinycolor2": "^1.4.2"
   },
   "browserslist": [
     "maintained node versions"
