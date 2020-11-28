@@ -1,4 +1,4 @@
-import graphqlHttp from 'express-graphql';
+import { graphqlHTTP } from 'express-graphql';
 import express from 'express';
 import Raven from 'raven';
 import rc from 'rc';
@@ -15,7 +15,7 @@ const config = rc('filament', {
   port: 8080,
 });
 
-const graphqlEndpoint = graphqlHttp(() => {
+const graphqlEndpoint = graphqlHTTP(() => {
   const requestStartTime = Date.now();
   const hue = createHueLoaders();
 
