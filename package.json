@@ -44,7 +44,7 @@
     "hue-connect": "0.3.0",
     "invariant": "2.2.4",
     "node-fetch": "2.6.5",
-    "pm2": "5.1.1",
+    "pm2": "5.1.2",
     "raven": "2.6.4",
     "rc": "1.2.8",
     "tinycolor2": "1.4.2"
