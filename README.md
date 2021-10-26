@@ -1,8 +1,13 @@
 # Filament
 *GraphQL, but for your lights*
 
+## Project Status
+:no_entry: UNMAINTAINED
+
+I'm sad to say it, but the project is dead. I'd hoped to find an excuse to dive in again, but it never came. 3rd party apps and integrations became good enough that I no longer got value in maintaining my own automation platform.
+
 ## Why?
-Because GraphQL is amazing and so is home automation and I'm not choosing between them you can't make me.
+Because GraphQL is amazing and so is home automation. Why not both?
 
 ## Trying it out
 First off, you need lights. The special kind you can control with your smartphone and pretend you're telekinetic. I get mine from [Philips](http://www2.meethue.com/en-us/products/?category=131159). I think you can use other types, but I've never tried.
